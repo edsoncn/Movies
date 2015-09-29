@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="0dp"
+    >
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:paddingLeft="5dp"
+        android:gravity="center_vertical"
+        android:background="@color/black"
+        android:height="35dp"
+        android:id="@+id/titulo" />
+
+    <com.edson.nanodegree.movies.app.MyGridView
+        android:id="@+id/grid"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:horizontalSpacing="2dp"
+        android:verticalSpacing="2dp"
+        android:isScrollContainer="false"
+        android:background="@color/black"
+        android:numColumns="4"/>
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="fill_parent"
+        android:layout_height="30dp"
+        android:layout_marginTop="2dp"
+        android:padding="0dp"
+        android:gravity="center_vertical|center_horizontal"
+        android:text="@string/button_plus"
+        android:textColor="@color/white_dark"
+        android:background="@drawable/round_button"
+        android:textStyle="bold"
+        android:textSize="24sp"/>
+
+</LinearLayout>

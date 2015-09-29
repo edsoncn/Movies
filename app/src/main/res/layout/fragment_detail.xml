@@ -1,0 +1,111 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:orientation="vertical"
+    android:padding="2dp"
+    android:background="@color/black"
+    tools:context="com.edson.nanodegree.movies.app.DetailActivity$PlaceholderFragment">
+
+    <ScrollView
+        android:id="@+id/scroll"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="0sp"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:id="@+id/layout"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:id="@+id/row"
+                android:layout_weight="5" >
+
+                <com.edson.nanodegree.movies.app.SquaredImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2.875"
+                    android:id="@+id/poster"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
+                    android:layout_weight="2.125"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:textColor="@color/white"
+                        android:textStyle="bold"
+                        android:id="@+id/title" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:textColor="@color/white_dark2"
+                        android:text="@string/app_detail_rating"
+                        android:textStyle="bold"
+                        android:layout_marginTop="20dp"/>
+
+                    <RatingBar
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        style="?android:attr/ratingBarStyleSmall"
+                        android:id="@+id/ratingBar" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:textColor="@color/white_dark2"
+                        android:text="@string/app_detail_release"
+                        android:textStyle="bold"
+                        android:layout_marginTop="20dp"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:textColor="@color/white_dark2"
+                        android:layout_marginTop="5dp"
+                        android:id="@+id/release" />
+
+                </LinearLayout>
+            </TableRow>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textColor="@color/white_dark2"
+                android:textStyle="bold"
+                android:text="@string/app_detail_synopsis" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top"
+                android:padding="5dp"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textColor="@color/white_dark2"
+                android:id="@+id/synopsis" />
+
+        </LinearLayout>
+
+    </ScrollView>
+</LinearLayout>

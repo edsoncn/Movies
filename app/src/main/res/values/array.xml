@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="movie_api_genres_list">
+        <item>@string/movie_api_genres_action</item>
+        <item>@string/movie_api_genres_drama</item>
+        <item>@string/movie_api_genres_science</item>
+        <item>@string/movie_api_genres_comedy</item>
+        <item>@string/movie_api_genres_animation</item>
+        <item>@string/movie_api_genres_horror</item>
+    </string-array>
+</resources>
