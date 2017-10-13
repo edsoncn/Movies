@@ -1,14 +1,13 @@
-package com.edson.nanodegree.movies.app;
+package com.edson.nanodegree.movies.adapter;
 
 import android.content.Context;
-import android.content.Intent;
-import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Toast;
 
+import com.edson.nanodegree.movies.app.R;
+import com.edson.nanodegree.movies.app.SquaredImageView;
+import com.edson.nanodegree.movies.bean.MovieBean;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -31,10 +30,6 @@ public class CustomGridViewAdapter extends ArrayAdapter<MovieBean> {
 
         //Images for grid
         urlImage = context.getResources().getString(R.string.movie_api_base_image_url);
-    }
-
-    public ArrayList<MovieBean> getMovies() {
-        return movies;
     }
 
     @Override public View getView(int position, View convertView, ViewGroup parent) {
@@ -63,4 +58,9 @@ public class CustomGridViewAdapter extends ArrayAdapter<MovieBean> {
 
         return view;
     }
+
+    public ArrayList<MovieBean> getMovies() {
+        return movies;
+    }
+
 }

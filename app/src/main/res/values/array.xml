@@ -1,11 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string-array name="movie_api_genres_list">
-        <item>@string/movie_api_genres_action</item>
-        <item>@string/movie_api_genres_drama</item>
-        <item>@string/movie_api_genres_science</item>
-        <item>@string/movie_api_genres_comedy</item>
-        <item>@string/movie_api_genres_animation</item>
-        <item>@string/movie_api_genres_horror</item>
+    <string-array name="movie_api_genres_list_ids">
+        <item>@string/movie_api_genres_action_id</item>
+        <item>@string/movie_api_genres_drama_id</item>
+        <item>@string/movie_api_genres_science_id</item>
+        <item>@string/movie_api_genres_animation_id</item>
+        <item>@string/movie_api_genres_comedy_id</item>
+        <item>@string/movie_api_genres_horror_id</item>
+        <item>@string/movie_api_genres_documentary_id</item>
+        <item>@string/movie_api_genres_fantasy_id</item>
+        <item>@string/movie_api_genres_romance_id</item>
+        <item>@string/movie_api_genres_war_id</item>
     </string-array>
+
+    <string-array name="movie_api_genres_pref_list">
+        <item>@string/movie_api_genres_pref_action</item>
+        <item>@string/movie_api_genres_pref_drama</item>
+        <item>@string/movie_api_genres_pref_science</item>
+        <item>@string/movie_api_genres_pref_animation</item>
+        <item>@string/movie_api_genres_pref_comedy</item>
+        <item>@string/movie_api_genres_pref_horror</item>
+        <item>@string/movie_api_genres_pref_documentary</item>
+        <item>@string/movie_api_genres_pref_fantasy</item>
+        <item>@string/movie_api_genres_pref_romance</item>
+        <item>@string/movie_api_genres_pref_war</item>
+    </string-array>
+
+    <string-array name="movie_api_genres_pref_list_defaults">
+        <item>@string/movie_api_genres_action_id</item>
+        <item>@string/movie_api_genres_drama_id</item>
+        <item>@string/movie_api_genres_science_id</item>
+        <item>@string/movie_api_genres_animation_id</item>
+    </string-array>
+
 </resources>

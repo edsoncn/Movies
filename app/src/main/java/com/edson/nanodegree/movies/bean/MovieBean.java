@@ -1,4 +1,4 @@
-package com.edson.nanodegree.movies.app;
+package com.edson.nanodegree.movies.bean;
 
 import android.os.Bundle;
 

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <MultiSelectListPreference
+        android:defaultValue="@array/movie_api_genres_pref_list_defaults"
+        android:entries="@array/movie_api_genres_pref_list"
+        android:entryValues="@array/movie_api_genres_list_ids"
+        android:key="@string/preference_genres_list_key"
+        android:title="@string/preference_genres_list_desc" />
+    
+</PreferenceScreen>

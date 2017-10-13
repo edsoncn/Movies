@@ -1,0 +1,78 @@
+<resources>
+    <string name="app_name">Movies</string>
+    <string name="app_description">Explore the movies</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="title_movie_categories">Movie Categories</string>
+    <string name="title_movie_detail">Movie Details</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="menu_sort">Sort by</string>
+    <string name="menu_sort_by_popularity">Most Popular</string>
+    <string name="menu_sort_by_rate">Most Rate</string>
+    <string name="button_plus">+</string>
+    <string name="app_most_popular">Most Popular</string>
+    <string name="app_most_rate">Most Rate</string>
+    <string name="app_detail_rating">Rating: </string>
+    <string name="app_detail_release">Release: </string>
+    <string name="app_detail_release_none">No release date found.</string>
+    <string name="app_detail_release_format8601">yyyy-MM-dd</string>
+    <string name="app_detail_release_format">EEEE, MMMM d, yyyy</string>
+    <string name="app_detail_synopsis">Synopsis: </string>
+
+    <string name="movie_api_base_image_url">http://image.tmdb.org/t/p/w185//</string>
+    <string name="movie_api_base_image_url_500">http://image.tmdb.org/t/p/w500//</string>
+    <string name="movie_api_base_discovery_url">http://api.themoviedb.org/3/discover/movie</string>
+    <string name="movie_api_base_genres_url">http://api.themoviedb.org/3/genre/movie/list</string>
+
+    <string name="movie_api_key_param">api_key</string>
+    <string name="movie_api_key_value">ba775afafc2f34aec47a89f91dd2ed10</string>
+    <string name="movie_api_sort_param">sort_by</string>
+    <string name="movie_api_sort_popularity_desc">popularity.desc</string>
+    <string name="movie_api_sort_rate_desc">vote_average.desc</string>
+    <string name="movie_api_language_param">language</string>
+    <string name="movie_api_language_value">en</string>
+    <string name="movie_api_page_param">page</string>
+    <string name="movie_api_genres_param">with_genres</string>
+
+    <integer name="page_size">8</integer>
+
+    <string name="movie_api_sortby_genres">{0} in {1}</string>
+
+    <string name="movie_api_genres_action_id">28</string>
+    <string name="movie_api_genres_drama_id">18</string>
+    <string name="movie_api_genres_science_id">878</string>
+    <string name="movie_api_genres_comedy_id">35</string>
+    <string name="movie_api_genres_animation_id">16</string>
+    <string name="movie_api_genres_horror_id">27</string>
+    <string name="movie_api_genres_documentary_id">99</string>
+    <string name="movie_api_genres_fantasy_id">14</string>
+    <string name="movie_api_genres_romance_id">10749</string>
+    <string name="movie_api_genres_war_id">10752</string>
+
+    <string name="movie_api_genres_pref_action">Action</string>
+    <string name="movie_api_genres_pref_drama">Drama</string>
+    <string name="movie_api_genres_pref_science">Science</string>
+    <string name="movie_api_genres_pref_comedy">Comedy</string>
+    <string name="movie_api_genres_pref_animation">Animation</string>
+    <string name="movie_api_genres_pref_horror">Horror</string>
+    <string name="movie_api_genres_pref_documentary">Documentary</string>
+    <string name="movie_api_genres_pref_fantasy">Fantasy</string>
+    <string name="movie_api_genres_pref_romance">Romance</string>
+    <string name="movie_api_genres_pref_war">War</string>
+
+    <string name="nav_name_settings">Settings</string>
+    <string name="nav_name_search">Search</string>
+    <string name="nav_name_favorite">Favorite movies</string>
+
+    <string name="settings_header">Settings</string>
+
+    <string name="preference_genres_list_key">preference_genres_list</string>
+    <string name="preference_genres_list_desc">Categories of your preference</string>
+
+    <string name="movies_detail_header">Movie details</string>
+
+
+</resources>

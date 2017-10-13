@@ -1,17 +1,12 @@
 package com.edson.nanodegree.movies.app;
 
-import android.app.ActionBar;
 import android.content.Context;
 import android.util.AttributeSet;
-import android.util.TypedValue;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TableRow;
 
 /** An image view which always remains square with respect to its width. */
-final class SquaredImageView extends ImageView {
+final public class SquaredImageView extends android.support.v7.widget.AppCompatImageView {
 
     private View content;
     private Integer heightPlus;
