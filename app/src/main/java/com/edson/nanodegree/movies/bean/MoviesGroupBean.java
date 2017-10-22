@@ -4,7 +4,6 @@ import android.content.Context;
 import android.net.Uri;
 
 import com.edson.nanodegree.movies.adapter.CustomGridViewAdapter;
-import com.edson.nanodegree.movies.app.ILoadMovies;
 import com.edson.nanodegree.movies.app.R;
 
 import java.util.ArrayList;
@@ -13,31 +12,31 @@ import java.util.List;
 /**
  * Created by edson on 10/09/2015.
  */
-public class CategoryBean {
+public class MoviesGroupBean {
 
-    private String categoryName;
+    private String groupName;
     private String title;
     private List<MovieBean> movies;
     private List<MovieBean> moviesTemp;
     private int remotePage;
     private int pageSize;
     private int currentPage;
-    private ILoadMovies iLoadMovies;
     private Integer id;
     private boolean isActive;
-    private Uri uri;
+
+    private Uri.Builder uriBuilder;
+    private String pageParameter;
 
     private CustomGridViewAdapter adapter;
 
-    public CategoryBean(Context context, String categoryName, ILoadMovies iLoadMovies, Integer id) {
-        this.categoryName = categoryName;
+    public MoviesGroupBean(Context context, String groupName, Integer id) {
+        this.groupName = groupName;
         movies = new ArrayList<>();
         moviesTemp = new ArrayList<>();
         remotePage = 0;
         currentPage = 1;
         adapter = new CustomGridViewAdapter(context, new ArrayList<MovieBean>());
         pageSize = context.getResources().getInteger(R.integer.page_size);
-        this.iLoadMovies = iLoadMovies;
         this.id = id;
         isActive = true;
     }
@@ -69,24 +68,29 @@ public class CategoryBean {
      * Validate whether the new page is completed with the
      * temporary list but carry more movies
      * */
-    public boolean validateLoadMovies(){
+    public boolean validateLoadMoviesPageComplete(){
         if(getRealPage() < currentPage){
+            int total = movies.size();
             while(!moviesTemp.isEmpty() && getRealPage() < currentPage){
                 MovieBean movieBean = moviesTemp.remove(0);
                 movies.add(movieBean);
                 adapter.getMovies().add(movieBean);
             }
+            if(total < movies.size()){
+                notifyDataSetChanged();
+            }
             if(getRealPage() < currentPage){
-                iLoadMovies.loadCategoryMoviesBeanInChain(this);
                 return false;
             }else{
-                adapter.notifyDataSetChanged();
                 return true;
             }
         }else{
-            adapter.notifyDataSetChanged();
             return true;
         }
+    }
+
+    public void notifyDataSetChanged(){
+        adapter.notifyDataSetChanged();
     }
 
     public int getRealPage(){
@@ -157,16 +161,12 @@ public class CategoryBean {
         this.id = id;
     }
 
-    public ILoadMovies getiLoadMovies() {
-        return iLoadMovies;
+    public String getGroupName() {
+        return groupName;
     }
 
-    public String getCategoryName() {
-        return categoryName;
-    }
-
-    public void setCategoryName(String categoryName) {
-        this.categoryName = categoryName;
+    public void setGroupName(String groupName) {
+        this.groupName = groupName;
     }
 
     public boolean isActive() {
@@ -177,11 +177,19 @@ public class CategoryBean {
         isActive = active;
     }
 
-    public Uri getUri() {
-        return uri;
+    public Uri.Builder getUriBuilder() {
+        return uriBuilder;
     }
 
-    public void setUri(Uri uri) {
-        this.uri = uri;
+    public void setUriBuilder(Uri.Builder uriBuilder) {
+        this.uriBuilder = uriBuilder;
+    }
+
+    public String getPageParameter() {
+        return pageParameter;
+    }
+
+    public void setPageParameter(String pageParameter) {
+        this.pageParameter = pageParameter;
     }
 }

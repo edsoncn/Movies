@@ -3,7 +3,7 @@
   <component name="Encoding" defaultCharsetForPropertiesFiles="UTF-8">
     <file url="file://$PROJECT_DIR$/app/src/main/assets/font/lqdkdz_nospace.ttf" charset="windows-1252" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/com/edson/nanodegree/movies/app/SquaredImageView.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/app/src/main/java/com/edson/nanodegree/movies/bean/CategoryBean.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/edson/nanodegree/movies/bean/MoviesGroupBean.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/src/main/res/layout/layout_movies.xml" charset="UTF-8" />
     <file url="PROJECT" charset="UTF-8" />
   </component>

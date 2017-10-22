@@ -4,5 +4,5 @@
     android:id="@+id/fragmentMovies"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:name="com.edson.nanodegree.movies.app.MoviesFragment"
+    android:name="com.edson.nanodegree.movies.app.MoviesCategoriesFragment"
     tools:context="com.edson.nanodegree.movies.app.MoviesActivity" />

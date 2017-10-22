@@ -2,7 +2,7 @@ package com.edson.nanodegree.movies.util;
 
 import android.util.Log;
 
-import com.edson.nanodegree.movies.bean.CategoryBean;
+import com.edson.nanodegree.movies.bean.MoviesGroupBean;
 import com.edson.nanodegree.movies.bean.MovieBean;
 
 import org.json.JSONArray;
@@ -99,7 +99,7 @@ public class MoviesActivityUtil {
         return jsonStr;
     }
 
-    public static CategoryBean loadMoviesFromDiscoveryJson(String json, CategoryBean category) {
+    public static MoviesGroupBean loadMoviesFromDiscoveryJson(String json, MoviesGroupBean moviesGroupBean) {
         try {
             JSONObject jsonObject = new JSONObject(json);
             JSONArray array = jsonObject.getJSONArray("results");
@@ -117,11 +117,11 @@ public class MoviesActivityUtil {
                     String releaseDate = jObj.getString("release_date");
                     sb.append(id + ", ");
                     String pathUrl = path;
-                    category.addMovie(new MovieBean(id, pathUrl, title, synopsis, rating, releaseDate));
+                    moviesGroupBean.addMovie(new MovieBean(id, pathUrl, title, synopsis, rating, releaseDate));
                 }
             }
             Log.i(LOG_TAG, sb.toString());
-            return category;
+            return moviesGroupBean;
         } catch (JSONException e) {
             Log.i(LOG_TAG, "Error al cargar las videos");
             return null;

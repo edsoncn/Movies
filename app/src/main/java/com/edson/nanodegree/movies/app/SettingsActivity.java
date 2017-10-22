@@ -48,8 +48,10 @@ public class SettingsActivity extends AppCompatActivity {
             SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getActivity());
             Set<String> values = sharedPref.getStringSet("multi_select_list_genres", null);
 
-            for(String s : values){
-                Log.i(LOG_TAG, " > values: " + s);
+            if(values != null) {
+                for (String s : values) {
+                    Log.i(LOG_TAG, " > values: " + s);
+                }
             }
 
         }

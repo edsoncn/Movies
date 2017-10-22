@@ -22,7 +22,7 @@ import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
-import com.edson.nanodegree.movies.bean.CategoryBean;
+import com.edson.nanodegree.movies.bean.MoviesGroupBean;
 import com.edson.nanodegree.movies.bean.MovieBean;
 import com.edson.nanodegree.movies.util.MoviesActivityUtil;
 
@@ -38,15 +38,16 @@ import java.util.Set;
 /**
  * A placeholder fragment containing a simple view.
  */
-public class MoviesFragment extends Fragment implements ILoadMovies {
+public class MoviesFragment extends Fragment{
 
     private static final String LOG_TAG = MoviesFragment.class.getSimpleName();
 
     private LinearLayout layoutContent;
     private ScrollView moviesScroll;
-    private CategoryBean[] categoryBeans;
     private View[] categoryViews;
     private TextView floatingHeader;
+
+    private MoviesGroupBean[] moviesGroupBeans;
     private int arrayCategoryIndex;
     private int scrollIndex;
 
@@ -87,9 +88,9 @@ public class MoviesFragment extends Fragment implements ILoadMovies {
                 if(categoryViews != null){
                     int i = 0;
                     for (View v : categoryViews) {
-                        if(categoryBeans[i].isActive()) {
+                        if(moviesGroupBeans[i].isActive()) {
                             if (moviesScroll.getScrollY() > v.getTop() + floatingHeader.getHeight() / 2 && i != scrollIndex) {
-                                floatingHeader.setText(categoryBeans[i].getTitle());
+                                floatingHeader.setText(moviesGroupBeans[i].getTitle());
                                 scrollIndex = i;
                             }
                         }
@@ -115,10 +116,10 @@ public class MoviesFragment extends Fragment implements ILoadMovies {
 
     private void loadMoviesFromPreference(){
 
-        categoryBeans = new CategoryBean[genresValues.length + 1];
+        moviesGroupBeans = new MoviesGroupBean[genresValues.length + 1];
 
         // all genres
-        categoryBeans[0] = new CategoryBean(getActivity(), "", this, null);
+        moviesGroupBeans[0] = new MoviesGroupBean(getActivity(), "", null);
 
         // adding genres
         for(int i = 0; i < genresValues.length; i++){
@@ -128,8 +129,8 @@ public class MoviesFragment extends Fragment implements ILoadMovies {
 
             Log.i(LOG_TAG, " - name: " + name + ", id: " + id + ", isActive: " + isActive);
 
-            categoryBeans[i + 1] = new CategoryBean(getActivity(), name, this, Integer.parseInt(id));
-            categoryBeans[i + 1].setActive(isActive);
+            moviesGroupBeans[i + 1] = new MoviesGroupBean(getActivity(), name, Integer.parseInt(id));
+            moviesGroupBeans[i + 1].setActive(isActive);
         }
 
         loadCategoriesBeansViews();
@@ -140,10 +141,10 @@ public class MoviesFragment extends Fragment implements ILoadMovies {
 
     private void loadCategoriesBeans(Map<String, Integer> mapResult){
 
-        categoryBeans = new CategoryBean[mapResult.size() + 1];
+        moviesGroupBeans = new MoviesGroupBean[mapResult.size() + 1];
 
         // all genres
-        categoryBeans[0] = new CategoryBean(getActivity(), "", this, null);
+        moviesGroupBeans[0] = new MoviesGroupBean(getActivity(), "", null);
 
         // adding genres
         int i = 1;
@@ -154,8 +155,8 @@ public class MoviesFragment extends Fragment implements ILoadMovies {
 
             Log.i(LOG_TAG, " - name: " + name + ", id: " + id + ", isActive: " + isActive);
 
-            categoryBeans[i] = new CategoryBean(getActivity(), name, this, id);
-            categoryBeans[i].setActive(isActive);
+            moviesGroupBeans[i] = new MoviesGroupBean(getActivity(), name, id);
+            moviesGroupBeans[i].setActive(isActive);
             i++;
         }
 
@@ -168,14 +169,13 @@ public class MoviesFragment extends Fragment implements ILoadMovies {
     private void loadCategoriesBeansViews(){
 
         // load a layoutContent for each category
-        categoryViews = new LinearLayout[categoryBeans.length];
-        for (int i = 0; i < categoryBeans.length; i++) {
-            categoryViews[i] = getViewForCategory(layoutContent, categoryBeans[i], i);
+        categoryViews = new LinearLayout[moviesGroupBeans.length];
+        for (int i = 0; i < moviesGroupBeans.length; i++) {
+            categoryViews[i] = getViewForCategory(layoutContent, moviesGroupBeans[i], i);
         }
 
     }
 
-    @Override
     public void loadCategoryMoviesBeanInChainInit(){
         String headerTitle;
         if(sortValue.equals(getResources().getString(R.string.movie_api_sort_popularity_desc))){
@@ -183,15 +183,15 @@ public class MoviesFragment extends Fragment implements ILoadMovies {
         }else{
             headerTitle = getResources().getString(R.string.app_most_rate);
         }
-        categoryBeans[0].setTitle(headerTitle);
-        floatingHeader.setText(categoryBeans[0].getTitle());
+        moviesGroupBeans[0].setTitle(headerTitle);
+        floatingHeader.setText(moviesGroupBeans[0].getTitle());
 
         for(int i = 1; i < categoryViews.length; i++){
-            categoryBeans[i].setTitle(getResources().getString(R.string.movie_api_sortby_genres)
+            moviesGroupBeans[i].setTitle(getResources().getString(R.string.movie_api_sortby_genres)
                     .replace("{0}", headerTitle)
-                    .replace("{1}", categoryBeans[i].getCategoryName()));
+                    .replace("{1}", moviesGroupBeans[i].getGroupName()));
             TextView text = (TextView)categoryViews[i].findViewById(R.id.title);
-            text.setText(categoryBeans[i].getTitle());
+            text.setText(moviesGroupBeans[i].getTitle());
         }
 
         arrayCategoryIndex = 0;
@@ -200,20 +200,16 @@ public class MoviesFragment extends Fragment implements ILoadMovies {
 
         // we will start loading the first category with async task,
         // then continues with the next category until the final category
-        loadCategoryMoviesBeanInChain(categoryBeans[arrayCategoryIndex]);
+        loadCategoryMoviesBeanInChain(moviesGroupBeans[arrayCategoryIndex]);
     }
 
-    /**
-     * Implement loadMovie by category
-     * */
-    @Override
-    public void loadCategoryMoviesBeanInChain(CategoryBean categoryBean) {
-        Log.i(LOG_TAG, "LOAD: " + categoryBean.getTitle());
-        if(categoryBean.isActive()) {
-            new CategoryMoviesClientRestTask().execute(categoryBean);
-        }else if (arrayCategoryIndex < categoryBeans.length - 1) {
+    public void loadCategoryMoviesBeanInChain(MoviesGroupBean moviesGroupBean) {
+        Log.i(LOG_TAG, "LOAD: " + moviesGroupBean.getTitle());
+        if(moviesGroupBean.isActive()) {
+            new CategoryMoviesClientRestTask().execute(moviesGroupBean);
+        }else if (arrayCategoryIndex < moviesGroupBeans.length - 1) {
             arrayCategoryIndex++;
-            loadCategoryMoviesBeanInChain(categoryBeans[arrayCategoryIndex]);
+            loadCategoryMoviesBeanInChain(moviesGroupBeans[arrayCategoryIndex]);
         }
     }
 
@@ -225,22 +221,22 @@ public class MoviesFragment extends Fragment implements ILoadMovies {
 
     private void resetCategoriesBean(){
 
-        for(CategoryBean categoryBean : categoryBeans){
-            categoryBean.reset();
+        for(MoviesGroupBean moviesGroupBean : moviesGroupBeans){
+            moviesGroupBean.reset();
         }
 
         // adding genres
-        for(int i = 1; i < categoryBeans.length; i++){
-            boolean isActive = genresValuesSelected.contains(String.valueOf(categoryBeans[i].getId()));
-            categoryBeans[i].setActive(isActive);
+        for(int i = 1; i < moviesGroupBeans.length; i++){
+            boolean isActive = genresValuesSelected.contains(String.valueOf(moviesGroupBeans[i].getId()));
+            moviesGroupBeans[i].setActive(isActive);
         }
 
     }
 
     private void resetCategoriesBeanviews(){
-        for(int i = 1; i < categoryBeans.length; i++) {
-            categoryViews[i].setActivated(categoryBeans[i].isActive());
-            categoryViews[i].setVisibility(categoryBeans[i].isActive() ? View.VISIBLE : View.GONE);
+        for(int i = 1; i < moviesGroupBeans.length; i++) {
+            categoryViews[i].setActivated(moviesGroupBeans[i].isActive());
+            categoryViews[i].setVisibility(moviesGroupBeans[i].isActive() ? View.VISIBLE : View.GONE);
         }
     }
 
@@ -276,12 +272,12 @@ public class MoviesFragment extends Fragment implements ILoadMovies {
         }
     }
 
-    public class CategoryMoviesClientRestTask extends AsyncTask<CategoryBean, Void, CategoryBean> {
+    public class CategoryMoviesClientRestTask extends AsyncTask<MoviesGroupBean, Void, MoviesGroupBean> {
 
         private final String LOG_TAG = CategoryMoviesClientRestTask.class.getSimpleName();
 
         @Override
-        protected CategoryBean doInBackground(CategoryBean... params) {
+        protected MoviesGroupBean doInBackground(MoviesGroupBean... params) {
 
             final String URL_BASE = getResources().getString(R.string.movie_api_base_discovery_url);
             final String API_KEY_PARAM = getResources().getString(R.string.movie_api_key_param);
@@ -292,7 +288,7 @@ public class MoviesFragment extends Fragment implements ILoadMovies {
             final String LANGUAGE_VALUE = getResources().getString(R.string.movie_api_language_value);
             final String GEN_RES_PARAM = getResources().getString(R.string.movie_api_genres_param);
 
-            CategoryBean category = params[0];
+            MoviesGroupBean category = params[0];
             category.setRemotePage(category.getRemotePage() + 1);
 
             Uri.Builder builder = Uri.parse(URL_BASE).buildUpon()
@@ -312,21 +308,26 @@ public class MoviesFragment extends Fragment implements ILoadMovies {
         }
 
         @Override
-        protected void onPostExecute(CategoryBean category) {
+        protected void onPostExecute(MoviesGroupBean category) {
             Log.i(LOG_TAG, "moviesList: " + category.getMovies().size());
             Log.i(LOG_TAG, "moviesListTemp: " + category.getMoviesTemp().size());
             Log.i(LOG_TAG, "real and current: " + category.getRealPage() + ", " + category.getCurrentPage());
-            if(category.validateLoadMovies()){
-                if(arrayCategoryIndex < categoryBeans.length - 1) {
+
+            // Validate if the category is complete
+            if(category.validateLoadMoviesPageComplete()){
+                if(arrayCategoryIndex < moviesGroupBeans.length - 1) {
                     arrayCategoryIndex++;
-                    loadCategoryMoviesBeanInChain(categoryBeans[arrayCategoryIndex]);
+                    loadCategoryMoviesBeanInChain(moviesGroupBeans[arrayCategoryIndex]);
                 }
+            }else{
+                // Call again for make it complete
+                loadCategoryMoviesBeanInChain(category);
             }
 
         }
     }
 
-    private View getViewForCategory(ViewGroup viewGroup, final CategoryBean category, int index){
+    private View getViewForCategory(ViewGroup viewGroup, final MoviesGroupBean category, int index){
         View convertView = LayoutInflater.from(getActivity()).inflate(R.layout.layout_grid_section, null);
 
         convertView.setActivated(category.isActive());
@@ -357,7 +358,7 @@ public class MoviesFragment extends Fragment implements ILoadMovies {
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 category.setCurrentPage(category.getCurrentPage() + 1);
-                category.validateLoadMovies();
+                category.validateLoadMoviesPageComplete();
             }
         });
 
@@ -459,4 +460,5 @@ public class MoviesFragment extends Fragment implements ILoadMovies {
         super.onResume();
         Log.i(LOG_TAG, "onResume");
     }
+
 }
