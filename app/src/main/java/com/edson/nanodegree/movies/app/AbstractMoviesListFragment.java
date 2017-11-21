@@ -1,17 +1,10 @@
 package com.edson.nanodegree.movies.app;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Typeface;
-import android.net.Uri;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
@@ -24,13 +17,6 @@ import android.widget.TextView;
 import com.edson.nanodegree.movies.bean.MovieBean;
 import com.edson.nanodegree.movies.bean.MoviesGroupBean;
 import com.edson.nanodegree.movies.bean.MoviesListBean;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Set;
 
 /**
  * Created by edson on 15/10/2017.
@@ -81,16 +67,23 @@ public abstract class AbstractMoviesListFragment extends Fragment {
 
         });
 
-        moviesListBean = initMoviesListBean();
-        moviesListBean.init();
-
-        initViews();
-        loadMoviesGroupBeansInit();
+        init();
 
         return rootView;
     }
 
-    protected abstract MoviesListBean initMoviesListBean();
+    public void init(){
+        moviesListBean = initMoviesListBean();
+        moviesListBean.init();
+
+        initViews();
+
+        load();
+    }
+
+    public void load(){
+        loadMoviesGroupBeansInit();
+    }
 
     protected void initViews(){
         // load a layoutContent for each category
@@ -99,15 +92,18 @@ public abstract class AbstractMoviesListFragment extends Fragment {
             categoryViews[i] = getViewForMoviesGroup(layoutContent, moviesListBean.getMoviesGroupBeans().get(i), i);
         }
 
-        // load title for each group
+        // load title for the header with the first group
         floatingHeader.setText(moviesListBean.getMoviesGroupBeans().get(0).getTitle());
 
+        // load title for each others group
         for(int i = 1; i < categoryViews.length; i++){
             TextView text = (TextView) categoryViews[i].findViewById(R.id.title);
             text.setText(moviesListBean.getMoviesGroupBeans().get(i).getTitle());
         }
 
     }
+
+    protected abstract MoviesListBean initMoviesListBean();
 
     public void loadMoviesGroupBeansInit() {
         scrollIndex = -1;
@@ -119,7 +115,8 @@ public abstract class AbstractMoviesListFragment extends Fragment {
     public void reset(){
         moviesListBean.reset();
         resetViews();
-        loadMoviesGroupBeansInit();
+
+        load();
     }
 
     protected void resetViews(){
@@ -154,18 +151,22 @@ public abstract class AbstractMoviesListFragment extends Fragment {
             }
         });
 
-        Button button = (Button)convertView.findViewById(R.id.button);
+        Button plusButton = (Button)convertView.findViewById(R.id.plusButton);
         Typeface fontFace = Typeface.createFromAsset(getActivity().getAssets(), getResources().getString(R.string.font_lqdkdz_nospace));
-        button.setTypeface(fontFace);
-        button.setOnClickListener(new View.OnClickListener() {
+        plusButton.setTypeface(fontFace);
+        plusButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                moviesGroupBean.setCurrentPage(moviesGroupBean.getCurrentPage() + 1);
-                if(!moviesGroupBean.validateLoadMoviesPageComplete()){
-                    moviesGroupBean.setRemotePage(moviesGroupBean.getRemotePage() + 1);
-                    moviesListBean.callMoviesListClientRestTask(moviesGroupBean);
+                if(moviesGroupBean.getState() == MoviesGroupBean.STATE_LOADED){
+                    moviesGroupBean.setCurrentPage(moviesGroupBean.getCurrentPage() + 1);
+                    if(!moviesGroupBean.validateLoadMoviesPageComplete(moviesGroupBean.getMovies().size())){
+                        moviesGroupBean.setRemotePage(moviesGroupBean.getRemotePage() + 1);
+                        moviesGroupBean.load(moviesListBean);
+                    }
                 }
             }
         });
+        plusButton.setVisibility(View.GONE);
+        moviesGroupBean.setPlusButton(plusButton);
 
         viewGroup.addView(convertView);
         return convertView;

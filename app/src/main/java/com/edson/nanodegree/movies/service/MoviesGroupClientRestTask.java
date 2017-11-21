@@ -12,14 +12,14 @@ import com.edson.nanodegree.movies.util.MoviesActivityUtil;
  * Created by edson on 12/10/2017.
  */
 
-public class MoviesListClientRestTask extends AsyncTask<MoviesGroupBean, Void, MoviesGroupBean> {
+public class MoviesGroupClientRestTask extends AsyncTask<MoviesGroupBean, Void, MoviesGroupBean> {
 
-    private final String LOG_TAG = MoviesListClientRestTask.class.getSimpleName();
+    private final String LOG_TAG = MoviesGroupClientRestTask.class.getSimpleName();
 
     private MoviesListBean moviesListBean;
     private int moviesSize;
 
-    public MoviesListClientRestTask(MoviesListBean moviesListBean, int moviesSize){
+    public MoviesGroupClientRestTask(MoviesListBean moviesListBean, int moviesSize){
         this.moviesListBean = moviesListBean;
         this.moviesSize = moviesSize;
     }
@@ -35,7 +35,8 @@ public class MoviesListClientRestTask extends AsyncTask<MoviesGroupBean, Void, M
         Log.i(LOG_TAG, "Url: " + builder.build().toString());
 
         String jsonResult = MoviesActivityUtil.getJsonResultURL(builder.build().toString());
-        return MoviesActivityUtil.loadMoviesFromDiscoveryJson(jsonResult, moviesGroupBean);
+        moviesGroupBean.addMoviesFromJson(jsonResult);
+        return moviesGroupBean;
     }
 
     @Override
@@ -44,14 +45,11 @@ public class MoviesListClientRestTask extends AsyncTask<MoviesGroupBean, Void, M
         Log.i(LOG_TAG, "Movies list temp size: " + moviesGroupBean.getMoviesTemp().size());
         Log.i(LOG_TAG, "Real and current: " + moviesGroupBean.getRealPage() + ", " + moviesGroupBean.getCurrentPage());
 
-        if(moviesSize < moviesGroupBean.getMovies().size()) {
-            moviesGroupBean.notifyDataSetChanged();
-        }
-        if(moviesGroupBean.validateLoadMoviesPageComplete()){
+        if(moviesGroupBean.validateLoadMoviesPageComplete(moviesSize)){
             moviesListBean.loadMoviesGroupBeansInChain();
         }else{
             moviesGroupBean.setRemotePage(moviesGroupBean.getRemotePage() + 1);
-            moviesListBean.callMoviesListClientRestTask(moviesGroupBean);
+            moviesGroupBean.load(moviesListBean);
         }
     }
 }

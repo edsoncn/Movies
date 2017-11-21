@@ -26,6 +26,7 @@
     <string name="movie_api_base_image_url_500">http://image.tmdb.org/t/p/w500//</string>
     <string name="movie_api_base_discovery_url">http://api.themoviedb.org/3/discover/movie</string>
     <string name="movie_api_base_genres_url">http://api.themoviedb.org/3/genre/movie/list</string>
+    <string name="movie_api_base_search_url">https://api.themoviedb.org/3/search/movie</string>
 
     <string name="movie_api_key_param">api_key</string>
     <string name="movie_api_key_value">ba775afafc2f34aec47a89f91dd2ed10</string>
@@ -36,6 +37,7 @@
     <string name="movie_api_language_value">en</string>
     <string name="movie_api_page_param">page</string>
     <string name="movie_api_genres_param">with_genres</string>
+    <string name="movie_api_query_param">query</string>
 
     <integer name="page_size">8</integer>
 
@@ -73,6 +75,10 @@
     <string name="preference_genres_list_desc">Categories of your preference</string>
 
     <string name="movies_detail_header">Movie details</string>
+    <string name="movies_detail_action_remove">Remove from favorites</string>
+
+    <string name="search_title">Search</string>
+    <string name="search_hint">"e.g., spider"</string>
 
 
 </resources>

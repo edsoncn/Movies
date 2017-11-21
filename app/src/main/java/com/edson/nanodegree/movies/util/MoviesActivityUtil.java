@@ -1,7 +1,13 @@
 package com.edson.nanodegree.movies.util;
 
+import android.app.Activity;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 
+import com.edson.nanodegree.movies.app.MoviesSearchFragment;
+import com.edson.nanodegree.movies.app.R;
 import com.edson.nanodegree.movies.bean.MoviesGroupBean;
 import com.edson.nanodegree.movies.bean.MovieBean;
 
@@ -102,6 +108,10 @@ public class MoviesActivityUtil {
     public static MoviesGroupBean loadMoviesFromDiscoveryJson(String json, MoviesGroupBean moviesGroupBean) {
         try {
             JSONObject jsonObject = new JSONObject(json);
+
+            moviesGroupBean.setRemoteTotalPages(jsonObject.getInt("total_pages"));
+            moviesGroupBean.setRemoteTotalResults(jsonObject.getInt("total_results"));
+
             JSONArray array = jsonObject.getJSONArray("results");
             StringBuilder sb = new StringBuilder();
             sb.append(" IDs: ");
@@ -125,6 +135,21 @@ public class MoviesActivityUtil {
         } catch (JSONException e) {
             Log.i(LOG_TAG, "Error al cargar las videos");
             return null;
+        }
+    }
+
+    public static void openMoviesSearchFragment(FragmentManager fm){
+        final String TAG = "MoviesSearchFragment";
+        Fragment fragment = fm.findFragmentByTag(TAG);
+        Log.i(TAG, "Search Fragment: " + fragment);
+        if(fragment == null){
+            fragment = new MoviesSearchFragment();
+        }
+        if(!fragment.isVisible()) {
+            FragmentTransaction transaction = fm.beginTransaction();
+            transaction.addToBackStack(null);
+            transaction.replace(R.id.fragmentMoviesContainer, fragment, TAG);
+            transaction.commit();
         }
     }
 

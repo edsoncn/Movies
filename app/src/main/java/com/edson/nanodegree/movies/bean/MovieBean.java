@@ -1,5 +1,8 @@
 package com.edson.nanodegree.movies.bean;
 
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.Ignore;
+import android.arch.persistence.room.PrimaryKey;
 import android.os.Bundle;
 
 import java.text.SimpleDateFormat;
@@ -8,20 +11,30 @@ import java.util.Locale;
 /**
  * Created by edson on 14/09/2015.
  */
+
+@Entity(tableName = "movie")
 public class MovieBean {
 
+    @PrimaryKey
     private int id;
+
     private String pathUrl;
     private String title;
     private String synopsis;
     private Float rating;
     private String release;
 
+    public MovieBean(int id){
+        this.id = id;
+    }
+
+    @Ignore
     public MovieBean(int id, String pathUrl) {
         this.id = id;
         this.pathUrl = pathUrl;
     }
 
+    @Ignore
     public MovieBean(int id, String pathUrl, String title, String synopsis, Float rating, String release) {
         this.id = id;
         this.pathUrl = pathUrl;
@@ -31,6 +44,7 @@ public class MovieBean {
         this.release = release;
     }
 
+    @Ignore
     public MovieBean(Bundle bundle){
         this.id = bundle.getInt("id");
         this.pathUrl = bundle.getString("pathUrl");

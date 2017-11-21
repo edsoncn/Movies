@@ -314,7 +314,7 @@ public class MoviesFragment extends Fragment{
             Log.i(LOG_TAG, "real and current: " + category.getRealPage() + ", " + category.getCurrentPage());
 
             // Validate if the category is complete
-            if(category.validateLoadMoviesPageComplete()){
+            if(category.validateLoadMoviesPageComplete(category.getMovies().size())){
                 if(arrayCategoryIndex < moviesGroupBeans.length - 1) {
                     arrayCategoryIndex++;
                     loadCategoryMoviesBeanInChain(moviesGroupBeans[arrayCategoryIndex]);
@@ -352,13 +352,13 @@ public class MoviesFragment extends Fragment{
             }
         });
 
-        Button button = (Button)convertView.findViewById(R.id.button);
+        Button button = (Button)convertView.findViewById(R.id.plusButton);
         Typeface fontFace = Typeface.createFromAsset(getActivity().getAssets(), getResources().getString(R.string.font_lqdkdz_nospace));
         button.setTypeface(fontFace);
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 category.setCurrentPage(category.getCurrentPage() + 1);
-                category.validateLoadMoviesPageComplete();
+                category.validateLoadMoviesPageComplete(category.getMovies().size());
             }
         });
 

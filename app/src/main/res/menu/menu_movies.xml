@@ -1,5 +1,10 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/action_search"
+        android:icon="@drawable/ic_menu_search_white"
+        app:showAsAction="ifRoom"
+        android:title="@string/search_title" />
     <item android:id="@+id/item_sort" android:title="@string/menu_sort"
         android:orderInCategory="100" app:showAsAction="always" >
         <!-- "file" submenu -->
@@ -12,4 +17,9 @@
             </group>
         </menu>
     </item>
+    <item
+        android:id="@+id/action_settings"
+        android:orderInCategory="100"
+        android:title="@string/action_settings"
+        app:showAsAction="never" />
 </menu>

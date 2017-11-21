@@ -2,6 +2,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.edson.nanodegree.movies.app.MoviesDetailActivity">
-    <!--item android:id="@+id/action_settings" android:title="@string/action_settings"
-        android:orderInCategory="100" app:showAsAction="never" /-->
+
+    <item
+        android:id="@+id/action_remove"
+        android:title="@string/movies_detail_action_remove"
+        android:orderInCategory="100" app:showAsAction="never" />
 </menu>

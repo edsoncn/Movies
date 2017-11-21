@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<fragment xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fragmentMoviesContainer"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:name="com.edson.nanodegree.movies.app.MoviesCategoriesFragment"
+    tools:context="com.edson.nanodegree.movies.app.MoviesActivity" />

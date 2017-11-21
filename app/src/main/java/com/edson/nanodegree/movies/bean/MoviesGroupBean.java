@@ -2,9 +2,13 @@ package com.edson.nanodegree.movies.bean;
 
 import android.content.Context;
 import android.net.Uri;
+import android.view.View;
+import android.widget.Button;
 
 import com.edson.nanodegree.movies.adapter.CustomGridViewAdapter;
 import com.edson.nanodegree.movies.app.R;
+import com.edson.nanodegree.movies.service.MoviesGroupClientRestTask;
+import com.edson.nanodegree.movies.util.MoviesActivityUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,11 +18,20 @@ import java.util.List;
  */
 public class MoviesGroupBean {
 
+    public static final int STATE_INIT = 0;
+    public static final int STATE_LOADED = 1;
+    public static final int STATE_RESET = 2;
+    public static final int STATE_LOAD_FINISHED = 3;
+
     private String groupName;
     private String title;
     private List<MovieBean> movies;
     private List<MovieBean> moviesTemp;
+
     private int remotePage;
+    private int remoteTotalPages;
+    private int remoteTotalResults;
+
     private int pageSize;
     private int currentPage;
     private Integer id;
@@ -28,9 +41,13 @@ public class MoviesGroupBean {
     private String pageParameter;
 
     private CustomGridViewAdapter adapter;
+    private Button plusButton;
+
+    private int state;
 
     public MoviesGroupBean(Context context, String groupName, Integer id) {
         this.groupName = groupName;
+        this.title = groupName;
         movies = new ArrayList<>();
         moviesTemp = new ArrayList<>();
         remotePage = 0;
@@ -39,6 +56,7 @@ public class MoviesGroupBean {
         pageSize = context.getResources().getInteger(R.integer.page_size);
         this.id = id;
         isActive = true;
+        state = STATE_INIT;
     }
 
     /**
@@ -50,6 +68,16 @@ public class MoviesGroupBean {
         movies.clear();
         moviesTemp.clear();
         adapter.getMovies().clear();
+        state = STATE_RESET;
+    }
+
+    public void load(MoviesListBean moviesListBean){
+        state = STATE_LOADED;
+        new MoviesGroupClientRestTask(moviesListBean, getMovies().size()).execute(this);
+    }
+
+    public void addMoviesFromJson(String jsonResult){
+        MoviesActivityUtil.loadMoviesFromDiscoveryJson(jsonResult, this);
     }
 
     /**
@@ -68,25 +96,37 @@ public class MoviesGroupBean {
      * Validate whether the new page is completed with the
      * temporary list but carry more movies
      * */
-    public boolean validateLoadMoviesPageComplete(){
+    public boolean validateLoadMoviesPageComplete(int prevTotalMovies){
+        boolean isComplete;
         if(getRealPage() < currentPage){
-            int total = movies.size();
             while(!moviesTemp.isEmpty() && getRealPage() < currentPage){
                 MovieBean movieBean = moviesTemp.remove(0);
                 movies.add(movieBean);
                 adapter.getMovies().add(movieBean);
             }
-            if(total < movies.size()){
-                notifyDataSetChanged();
-            }
-            if(getRealPage() < currentPage){
-                return false;
+            if(getRemotePage() >= getRemoteTotalPages()){
+                state = STATE_LOAD_FINISHED;
+                isComplete = true;
+            }else if(getRealPage() < currentPage){
+                isComplete = false;
             }else{
-                return true;
+                isComplete = true;
             }
         }else{
-            return true;
+            isComplete = true;
         }
+
+        if(prevTotalMovies < movies.size()){
+            notifyDataSetChanged();
+        }
+
+        if(state == STATE_LOAD_FINISHED) {
+            plusButton.setVisibility(View.GONE);
+        }else{
+            plusButton.setVisibility(View.VISIBLE);
+        }
+
+        return isComplete;
     }
 
     public void notifyDataSetChanged(){
@@ -191,5 +231,33 @@ public class MoviesGroupBean {
 
     public void setPageParameter(String pageParameter) {
         this.pageParameter = pageParameter;
+    }
+
+    public int getState() {
+        return state;
+    }
+
+    public Button getPlusButton() {
+        return plusButton;
+    }
+
+    public void setPlusButton(Button plusButton) {
+        this.plusButton = plusButton;
+    }
+
+    public int getRemoteTotalPages() {
+        return remoteTotalPages;
+    }
+
+    public void setRemoteTotalPages(int remoteTotalPages) {
+        this.remoteTotalPages = remoteTotalPages;
+    }
+
+    public int getRemoteTotalResults() {
+        return remoteTotalResults;
+    }
+
+    public void setRemoteTotalResults(int remoteTotalResults) {
+        this.remoteTotalResults = remoteTotalResults;
     }
 }
