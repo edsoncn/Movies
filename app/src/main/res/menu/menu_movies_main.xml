@@ -2,7 +2,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/action_search"
-        android:icon="@drawable/ic_menu_search_white"
+        android:icon="@drawable/ic_menu_search_toolbar"
         app:showAsAction="ifRoom"
         android:title="@string/search_title" />
     <item android:id="@+id/item_sort" android:title="@string/menu_sort"
@@ -14,6 +14,10 @@
                 android:title="@string/menu_sort_by_popularity"/>
             <item android:id="@+id/item_rate"
                 android:title="@string/menu_sort_by_rate"/>
+            <item android:id="@+id/item_upcoming"
+                android:title="@string/menu_sort_by_upcoming"/>
+            <item android:id="@+id/item_now_playing"
+                android:title="@string/menu_sort_by_now_playing"/>
             </group>
         </menu>
     </item>

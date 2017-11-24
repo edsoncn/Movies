@@ -1,7 +1,10 @@
  package com.edson.nanodegree.movies.app;
 
 import android.content.SharedPreferences;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.os.Bundle;;
+import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
@@ -29,6 +32,15 @@ public class SettingsActivity extends AppCompatActivity {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbarSettings);
         setSupportActionBar(toolbar);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
     }
 
     public static class SettingsFragment extends PreferenceFragment  {
@@ -54,6 +66,19 @@ public class SettingsActivity extends AppCompatActivity {
                 }
             }
 
+            Preference prefAboutVersion = findPreference(getResources().getString(R.string.preference_about_version_key));
+            try {
+                prefAboutVersion.setSummary(String.valueOf(prefAboutVersion.getSummary()).replace("{0}", appVersion()));
+            } catch (PackageManager.NameNotFoundException e) {
+                Log.i(LOG_TAG, "Can't find the version: " + e.getMessage());
+            }
+
+        }
+
+        public String appVersion() throws PackageManager.NameNotFoundException {
+            PackageInfo pInfo = getActivity().getPackageManager().getPackageInfo(getActivity().getPackageName(), 0);
+            String version = pInfo.versionName;
+            return version;
         }
     }
 }

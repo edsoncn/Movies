@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">Movies</string>
-    <string name="app_description">Explore the movies</string>
+    <string name="app_description">Explore the movies in a different way</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -12,9 +12,13 @@
     <string name="menu_sort">Sort by</string>
     <string name="menu_sort_by_popularity">Most Popular</string>
     <string name="menu_sort_by_rate">Most Rate</string>
+    <string name="menu_sort_by_upcoming">Upcoming</string>
+    <string name="menu_sort_by_now_playing">Now Playing</string>
     <string name="button_plus">+</string>
     <string name="app_most_popular">Most Popular</string>
     <string name="app_most_rate">Most Rate</string>
+    <string name="app_upcoming">Upcoming</string>
+    <string name="app_now_playing">Now Playing</string>
     <string name="app_detail_rating">Rating: </string>
     <string name="app_detail_release">Release: </string>
     <string name="app_detail_release_none">No release date found.</string>
@@ -33,13 +37,18 @@
     <string name="movie_api_sort_param">sort_by</string>
     <string name="movie_api_sort_popularity_desc">popularity.desc</string>
     <string name="movie_api_sort_rate_desc">vote_average.desc</string>
+    <string name="movie_api_primary_release_date_gte">primary_release_date.gte</string>
+    <string name="movie_api_release_date_gte">release_date.gte</string>
+    <string name="movie_api_release_date_lte">release_date.lte</string>
     <string name="movie_api_language_param">language</string>
     <string name="movie_api_language_value">en</string>
     <string name="movie_api_page_param">page</string>
     <string name="movie_api_genres_param">with_genres</string>
     <string name="movie_api_query_param">query</string>
 
-    <integer name="page_size">8</integer>
+    <integer name="page_size_4">4</integer>
+    <integer name="page_size_8">8</integer>
+    <integer name="page_size_12">12</integer>
 
     <string name="movie_api_sortby_genres">{0} in {1}</string>
 
@@ -71,8 +80,13 @@
 
     <string name="settings_header">Settings</string>
 
+    <string name="preference_general_group">General</string>
+    <string name="preference_about_group">About</string>
     <string name="preference_genres_list_key">preference_genres_list</string>
-    <string name="preference_genres_list_desc">Categories of your preference</string>
+    <string name="preference_genres_list_title">Categories of your preference</string>
+    <string name="preference_genres_list_summary">Choose the categories you want to see on the main screen</string>
+    <string name="preference_about_version_key">preference_about_version</string>
+    <string name="preference_about_version_summary">Current version is {0}</string>
 
     <string name="movies_detail_header">Movie details</string>
     <string name="movies_detail_action_remove">Remove from favorites</string>
@@ -80,5 +94,6 @@
     <string name="search_title">Search</string>
     <string name="search_hint">"e.g., spider"</string>
 
+    <string name="movies_favorites_header">Movie Favorites</string>
 
 </resources>

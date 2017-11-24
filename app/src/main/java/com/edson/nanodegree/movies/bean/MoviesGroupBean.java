@@ -1,14 +1,12 @@
 package com.edson.nanodegree.movies.bean;
 
 import android.content.Context;
-import android.net.Uri;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
-import com.edson.nanodegree.movies.adapter.CustomGridViewAdapter;
-import com.edson.nanodegree.movies.app.R;
+import com.edson.nanodegree.movies.adapter.CustomMoviesGridViewAdapter;
 import com.edson.nanodegree.movies.service.MoviesGroupClientRestTask;
-import com.edson.nanodegree.movies.util.MoviesActivityUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +15,8 @@ import java.util.List;
  * Created by edson on 10/09/2015.
  */
 public class MoviesGroupBean {
+
+    private static final String LOG_TAG = MoviesGroupBean.class.getSimpleName();
 
     public static final int STATE_INIT = 0;
     public static final int STATE_LOADED = 1;
@@ -37,26 +37,25 @@ public class MoviesGroupBean {
     private Integer id;
     private boolean isActive;
 
-    private Uri.Builder uriBuilder;
-    private String pageParameter;
-
-    private CustomGridViewAdapter adapter;
+    private CustomMoviesGridViewAdapter adapter;
     private Button plusButton;
 
     private int state;
+    private int prevTotalMovies;
 
-    public MoviesGroupBean(Context context, String groupName, Integer id) {
+    public MoviesGroupBean(Context context, String groupName, Integer id, int pageSize) {
         this.groupName = groupName;
         this.title = groupName;
         movies = new ArrayList<>();
         moviesTemp = new ArrayList<>();
         remotePage = 0;
         currentPage = 1;
-        adapter = new CustomGridViewAdapter(context, new ArrayList<MovieBean>());
-        pageSize = context.getResources().getInteger(R.integer.page_size);
+        adapter = new CustomMoviesGridViewAdapter(context, new ArrayList<MovieBean>());
+        this.pageSize = pageSize;
         this.id = id;
         isActive = true;
         state = STATE_INIT;
+        prevTotalMovies = -1;
     }
 
     /**
@@ -69,15 +68,12 @@ public class MoviesGroupBean {
         moviesTemp.clear();
         adapter.getMovies().clear();
         state = STATE_RESET;
+        prevTotalMovies = -1;
     }
 
     public void load(MoviesListBean moviesListBean){
         state = STATE_LOADED;
-        new MoviesGroupClientRestTask(moviesListBean, getMovies().size()).execute(this);
-    }
-
-    public void addMoviesFromJson(String jsonResult){
-        MoviesActivityUtil.loadMoviesFromDiscoveryJson(jsonResult, this);
+        new MoviesGroupClientRestTask(moviesListBean).execute(this);
     }
 
     /**
@@ -96,7 +92,7 @@ public class MoviesGroupBean {
      * Validate whether the new page is completed with the
      * temporary list but carry more movies
      * */
-    public boolean validateLoadMoviesPageComplete(int prevTotalMovies){
+    public boolean validateLoadMoviesPageComplete(){
         boolean isComplete;
         if(getRealPage() < currentPage){
             while(!moviesTemp.isEmpty() && getRealPage() < currentPage){
@@ -104,6 +100,7 @@ public class MoviesGroupBean {
                 movies.add(movieBean);
                 adapter.getMovies().add(movieBean);
             }
+            Log.i(LOG_TAG, "Validate Page Complete : RemotePage = " + getRemotePage() + ", RemoteTotalPages = " + getRemoteTotalPages());
             if(getRemotePage() >= getRemoteTotalPages()){
                 state = STATE_LOAD_FINISHED;
                 isComplete = true;
@@ -113,12 +110,18 @@ public class MoviesGroupBean {
                 isComplete = true;
             }
         }else{
+            Log.i(LOG_TAG, "Validate Page Complete : RemotePage = " + getRemotePage() + ", RemoteTotalPages = " + getRemoteTotalPages());
+            if(getRemotePage() >= getRemoteTotalPages()){
+                state = STATE_LOAD_FINISHED;
+            }
             isComplete = true;
         }
 
+        //Validate if movies was added in order to update adapter
         if(prevTotalMovies < movies.size()){
             notifyDataSetChanged();
         }
+        prevTotalMovies = movies.size();
 
         if(state == STATE_LOAD_FINISHED) {
             plusButton.setVisibility(View.GONE);
@@ -161,11 +164,11 @@ public class MoviesGroupBean {
         this.remotePage = remotePage;
     }
 
-    public CustomGridViewAdapter getAdapter() {
+    public CustomMoviesGridViewAdapter getAdapter() {
         return adapter;
     }
 
-    public void setAdapter(CustomGridViewAdapter adapter) {
+    public void setAdapter(CustomMoviesGridViewAdapter adapter) {
         this.adapter = adapter;
     }
 
@@ -215,22 +218,6 @@ public class MoviesGroupBean {
 
     public void setActive(boolean active) {
         isActive = active;
-    }
-
-    public Uri.Builder getUriBuilder() {
-        return uriBuilder;
-    }
-
-    public void setUriBuilder(Uri.Builder uriBuilder) {
-        this.uriBuilder = uriBuilder;
-    }
-
-    public String getPageParameter() {
-        return pageParameter;
-    }
-
-    public void setPageParameter(String pageParameter) {
-        this.pageParameter = pageParameter;
     }
 
     public int getState() {

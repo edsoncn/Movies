@@ -1,5 +1,6 @@
 package com.edson.nanodegree.movies.dao;
 
+import android.arch.paging.TiledDataSource;
 import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Delete;
 import android.arch.persistence.room.Insert;
@@ -19,6 +20,12 @@ public interface MovieDao {
     @Query("SELECT * FROM movie")
     List<MovieBean> getAll();
 
+    @Query("SELECT * FROM movie")
+    TiledDataSource<MovieBean> getAllWithPagination();
+
+    @Query("SELECT count(id) FROM movie")
+    Integer count();
+
     @Insert
     void insertAll(MovieBean... movieBean);
 
@@ -27,4 +34,5 @@ public interface MovieDao {
 
     @Query("SELECT * FROM movie WHERE id = :id")
     MovieBean findById(int id);
+
 }

@@ -1,18 +1,14 @@
 package com.edson.nanodegree.movies.app;
 
-import android.net.Uri;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.widget.SearchView;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.animation.Animation;
 
 import com.edson.nanodegree.movies.bean.MoviesGroupBean;
 import com.edson.nanodegree.movies.bean.MoviesListBean;
+import com.edson.nanodegree.movies.service.LoadMoviesSearchService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,9 +19,10 @@ import java.util.List;
 
 public class MoviesSearchFragment extends AbstractMoviesListFragment {
 
-    private String searchTerm;
     private SearchView searchView;
     private MenuItem searchViewItem;
+
+    private LoadMoviesSearchService loadMovies;
 
     @Override
     protected MoviesListBean initMoviesListBean() {
@@ -33,39 +30,24 @@ public class MoviesSearchFragment extends AbstractMoviesListFragment {
             @Override
             public void init() {
                 List<MoviesGroupBean> moviesGroupBeans = new ArrayList<>();
-                // all genres
-                moviesGroupBeans.add(new MoviesGroupBean(getActivity(), "Search", null));
+                moviesGroupBeans.add(new MoviesGroupBean(getActivity(), "Search", null, getResources().getInteger(R.integer.page_size_12)));
 
                 this.setMoviesGroupBeans(moviesGroupBeans);
             }
-
-            @Override
-            public void generateUrls() {
-
-                final String URL_BASE = getResources().getString(R.string.movie_api_base_search_url);
-                final String API_KEY_PARAM = getResources().getString(R.string.movie_api_key_param);
-                final String API_KEY_VALUE = getResources().getString(R.string.movie_api_key_value);
-                final String PAGE = getResources().getString(R.string.movie_api_page_param);
-                final String LANGUAGE_PARAM = getResources().getString(R.string.movie_api_language_param);
-                final String LANGUAGE_VALUE = getResources().getString(R.string.movie_api_language_value);
-                final String QUERY_PARAM = getResources().getString(R.string.movie_api_query_param);
-
-                for(MoviesGroupBean moviesGroupBean : getMoviesGroupBeans()){
-                    Uri.Builder builder = Uri.parse(URL_BASE).buildUpon()
-                            .appendQueryParameter(API_KEY_PARAM, API_KEY_VALUE)
-                            .appendQueryParameter(LANGUAGE_PARAM, LANGUAGE_VALUE)
-                            .appendQueryParameter(QUERY_PARAM, searchTerm);
-                    moviesGroupBean.setUriBuilder(builder);
-                    moviesGroupBean.setPageParameter(PAGE);
-                }
-            }
-
         };
     }
 
     @Override
+    public void init() {
+        super.init();
+
+        loadMovies = new LoadMoviesSearchService(getContext());
+        moviesListBean.setLoadMovies(loadMovies);
+    }
+
+    @Override
     public void load(){
-        if(searchTerm != null && !searchTerm.isEmpty()){
+        if(loadMovies.getSearchTerm() != null && !loadMovies.getSearchTerm().isEmpty()){
             super.load();
         }
     }
@@ -73,7 +55,7 @@ public class MoviesSearchFragment extends AbstractMoviesListFragment {
     @Override
     public void loadMoviesGroupBeansInit() {
         MoviesGroupBean searchMoviesBean = moviesListBean.getMoviesGroupBeans().get(0);
-        searchMoviesBean.setTitle(searchMoviesBean.getGroupName() + " by '" + searchTerm + "'");
+        searchMoviesBean.setTitle(searchMoviesBean.getGroupName() + " by '" + loadMovies.getSearchTerm() + "'");
         floatingHeader.setText(moviesListBean.getMoviesGroupBeans().get(0).getTitle());
 
         super.loadMoviesGroupBeansInit();
@@ -83,7 +65,7 @@ public class MoviesSearchFragment extends AbstractMoviesListFragment {
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         menu.clear();
-        inflater.inflate(R.menu.menu_search, menu);
+        inflater.inflate(R.menu.menu_movies_search, menu);
 
         // Associate searchable configuration with the SearchView
         searchViewItem = menu.findItem(R.id.search_view);
@@ -93,7 +75,7 @@ public class MoviesSearchFragment extends AbstractMoviesListFragment {
             @Override
             public boolean onQueryTextSubmit(String query) {
                 searchView.clearFocus();
-                searchTerm = query.toLowerCase();
+                loadMovies.setSearchTerm(query.toLowerCase().trim());
                 reset();
                 return true;
             }

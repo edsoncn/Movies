@@ -17,13 +17,13 @@ import static android.widget.ImageView.ScaleType.CENTER_CROP;
 /**
  * Created by edson on 20/09/2015.
  */
-public class CustomGridViewAdapter extends ArrayAdapter<MovieBean> {
+public class CustomMoviesGridViewAdapter extends ArrayAdapter<MovieBean> {
 
     private ArrayList<MovieBean> movies;
     private final Context context;
     private String urlImage;
 
-    public CustomGridViewAdapter(Context context, ArrayList<MovieBean> movies){
+    public CustomMoviesGridViewAdapter(Context context, ArrayList<MovieBean> movies){
         super(context, 0, movies);
         this.movies = movies;
         this.context = context;

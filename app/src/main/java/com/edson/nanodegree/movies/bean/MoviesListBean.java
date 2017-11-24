@@ -2,6 +2,8 @@ package com.edson.nanodegree.movies.bean;
 
 import android.util.Log;
 
+import com.edson.nanodegree.movies.service.LoadMovies;
+
 import java.util.List;
 
 /**
@@ -14,7 +16,7 @@ public abstract class MoviesListBean {
 
     private List<MoviesGroupBean> moviesGroupBeans;
     private int index;
-    private int state;
+    private LoadMovies loadMovies;
 
     public MoviesListBean(){
     }
@@ -26,12 +28,8 @@ public abstract class MoviesListBean {
             moviesGroupBean.reset();
         }
     }
-
-    public abstract void generateUrls();
-
     public void loadMoviesGroupBeansInit(){
         index = -1;
-        generateUrls();
         loadMoviesGroupBeansInChain();
     }
 
@@ -59,7 +57,11 @@ public abstract class MoviesListBean {
         this.moviesGroupBeans = moviesGroupBeans;
     }
 
-    public int getState() {
-        return state;
+    public void setLoadMovies(LoadMovies loadMovies) {
+        this.loadMovies = loadMovies;
+    }
+
+    public LoadMovies getLoadMovies() {
+        return loadMovies;
     }
 }

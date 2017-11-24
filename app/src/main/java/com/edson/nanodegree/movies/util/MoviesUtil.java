@@ -1,6 +1,5 @@
 package com.edson.nanodegree.movies.util;
 
-import android.app.Activity;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -21,29 +20,14 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Created by edson on 21/07/2017.
  */
 
-public class MoviesActivityUtil {
+public class MoviesUtil {
 
-    public static final String LOG_TAG = MoviesActivityUtil.class.getSimpleName();
-
-    public static Map<String, Integer> getMapResult(String jsonResult) throws JSONException{
-        JSONObject jsonObject = new JSONObject(jsonResult);
-        JSONArray array = jsonObject.getJSONArray("genres");
-        Map<String, Integer> mapResult = new HashMap<>();
-        for (int i = 0; i < array.length(); i++) {
-            JSONObject jObj = array.getJSONObject(i);
-            String name = jObj.getString("name");
-            Integer id = jObj.getInt("id");
-            mapResult.put(name, id);
-        }
-        return mapResult;
-    }
+    public static final String LOG_TAG = MoviesUtil.class.getSimpleName();
 
     public static String getJsonResultURL(String myUrl) {
 

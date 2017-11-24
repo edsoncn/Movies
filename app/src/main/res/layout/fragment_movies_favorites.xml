@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<fragment xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fragmentMoviesFavorites"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:name="com.edson.nanodegree.movies.app.MoviesFavoritesFragment"
+    tools:context="com.edson.nanodegree.movies.app.MoviesFavoritesActivity" />

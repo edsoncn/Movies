@@ -19,7 +19,7 @@
         android:height="35dp"
         android:id="@+id/title" />
 
-    <com.edson.nanodegree.movies.app.MyGridView
+    <com.edson.nanodegree.movies.app.MoviesGridView
         android:id="@+id/grid"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

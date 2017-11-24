@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <group android:checkableBehavior="single">
+    <group android:checkableBehavior="single"
+        android:id="@+id/nav_general_group">
         <item
             android:id="@+id/nav_search"
             android:icon="@drawable/ic_menu_search"
@@ -13,7 +14,8 @@
             android:title="@string/nav_name_favorite" />
     </group>
 
-    <group android:checkableBehavior="single">
+    <group android:checkableBehavior="single"
+        android:id="@+id/nav_settings_group">
         <item
             android:id="@+id/nav_settings"
             android:icon="@drawable/ic_menu_settings"

@@ -5,4 +5,4 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:name="com.edson.nanodegree.movies.app.MoviesSearchFragment"
-    tools:context="com.edson.nanodegree.movies.app.MoviesActivity" />
+    tools:context="com.edson.nanodegree.movies.app.MoviesMainActivity" />

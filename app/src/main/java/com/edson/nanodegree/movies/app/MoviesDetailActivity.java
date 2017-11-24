@@ -39,6 +39,15 @@ public class MoviesDetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_movies_detail);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbarMoviesDetail);
         setSupportActionBar(toolbar);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
     }
 
     public static class MoviesDetailFragment extends Fragment {
@@ -144,6 +153,36 @@ public class MoviesDetailActivity extends AppCompatActivity {
             synopsis.setText(movie.getSynopsis());
 
             addFavorite = (FloatingActionButton) rootView.findViewById(R.id.addFavorite);
+            addFavorite.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(final View view) {
+                    new AsyncTask<Void, Void, Boolean>() {
+                        @Override
+                        protected Boolean doInBackground(Void... params) {
+                            try {
+                                moviesDB.movieDao().insertAll(movie);
+                                return true;
+                            } catch (Exception e) {
+                                Log.i(LOG_TAG, "There was an error trying to insert the movie to favorites: " + e.getMessage());
+                                return false;
+                            }
+                        }
+
+                        @Override
+                        protected void onPostExecute(Boolean inserted) {
+                            if (inserted) {
+                                Snackbar.make(view, "The movie was added to your favorites", Snackbar.LENGTH_LONG)
+                                        .setAction("Action", null).show();
+                                addFavorite.setVisibility(View.GONE);
+                                actionRemoveMenuItem.setEnabled(true);
+                            } else {
+                                Snackbar.make(view, "An error occur try it later", Snackbar.LENGTH_LONG)
+                                        .setAction("Action", null).show();
+                            }
+                        }
+                    }.execute();
+                }
+            });
 
             return rootView;
         }
@@ -151,7 +190,7 @@ public class MoviesDetailActivity extends AppCompatActivity {
         @Override
         public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
             menu.clear();
-            inflater.inflate(R.menu.menu_detail, menu);
+            inflater.inflate(R.menu.menu_movies_detail, menu);
 
             actionRemoveMenuItem = menu.findItem(R.id.action_remove);
             actionRemoveMenuItem.setEnabled(false);
@@ -185,6 +224,7 @@ public class MoviesDetailActivity extends AppCompatActivity {
                     protected void onPostExecute(Boolean deleted) {
                         if (deleted) {
                             addFavorite.setVisibility(View.VISIBLE);
+                            actionRemoveMenuItem.setEnabled(false);
                             Snackbar.make(rootView, "The movie was removed from favorites", Snackbar.LENGTH_LONG)
                                     .setAction("Action", null).show();
                         } else {
@@ -209,36 +249,6 @@ public class MoviesDetailActivity extends AppCompatActivity {
                 @Override
                 protected void onPostExecute(Boolean exists) {
                     if (!exists) {
-                        addFavorite.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(final View view) {
-                                new AsyncTask<Void, Void, Boolean>() {
-                                    @Override
-                                    protected Boolean doInBackground(Void... params) {
-                                        try {
-                                            moviesDB.movieDao().insertAll(movie);
-                                            return true;
-                                        } catch (Exception e) {
-                                            Log.i(LOG_TAG, "There was an error trying to insert the movie to favorites: " + e.getMessage());
-                                            return false;
-                                        }
-                                    }
-
-                                    @Override
-                                    protected void onPostExecute(Boolean inserted) {
-                                        if (inserted) {
-                                            Snackbar.make(view, "The movie was added to your favorites", Snackbar.LENGTH_LONG)
-                                                    .setAction("Action", null).show();
-                                            addFavorite.setVisibility(View.GONE);
-                                            actionRemoveMenuItem.setEnabled(true);
-                                        } else {
-                                            Snackbar.make(view, "An error occur try it later", Snackbar.LENGTH_LONG)
-                                                    .setAction("Action", null).show();
-                                        }
-                                    }
-                                }.execute();
-                            }
-                        });
                         addFavorite.setVisibility(View.VISIBLE);
                     }else{
                         actionRemoveMenuItem.setEnabled(true);

@@ -3,11 +3,28 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <MultiSelectListPreference
-        android:defaultValue="@array/movie_api_genres_pref_list_defaults"
-        android:entries="@array/movie_api_genres_pref_list"
-        android:entryValues="@array/movie_api_genres_list_ids"
-        android:key="@string/preference_genres_list_key"
-        android:title="@string/preference_genres_list_desc" />
-    
+    <PreferenceCategory
+        android:title="@string/preference_general_group"
+        android:key="preference_general_group_key">
+
+        <MultiSelectListPreference
+            android:defaultValue="@array/movie_api_genres_pref_list_defaults"
+            android:entries="@array/movie_api_genres_pref_list"
+            android:entryValues="@array/movie_api_genres_list_ids"
+            android:key="@string/preference_genres_list_key"
+            android:title="@string/preference_genres_list_title"
+            android:summary="@string/preference_genres_list_summary"/>
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="@string/preference_about_group"
+        android:key="preference_about_group_key">
+
+        <Preference
+            android:key="@string/preference_about_version_key"
+            android:summary="@string/preference_about_version_summary" />
+
+    </PreferenceCategory>
+
 </PreferenceScreen>

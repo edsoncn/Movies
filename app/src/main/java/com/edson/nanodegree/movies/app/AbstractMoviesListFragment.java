@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,8 +38,9 @@ public abstract class AbstractMoviesListFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        Log.i(LOG_TAG, "onCreateView");
 
-        View rootView = inflater.inflate(R.layout.layout_movies, container, false);
+        View rootView = inflater.inflate(R.layout.layout_movies_main, container, false);
 
         layoutContent = (LinearLayout) rootView.findViewById(R.id.movies_layout);
         moviesScroll = (ScrollView) rootView.findViewById(R.id.movies_scroll);
@@ -68,6 +70,7 @@ public abstract class AbstractMoviesListFragment extends Fragment {
         });
 
         init();
+        load();
 
         return rootView;
     }
@@ -77,8 +80,6 @@ public abstract class AbstractMoviesListFragment extends Fragment {
         moviesListBean.init();
 
         initViews();
-
-        load();
     }
 
     public void load(){
@@ -127,7 +128,7 @@ public abstract class AbstractMoviesListFragment extends Fragment {
     }
 
     protected View getViewForMoviesGroup(ViewGroup viewGroup, final MoviesGroupBean moviesGroupBean, int index){
-        View convertView = LayoutInflater.from(getActivity()).inflate(R.layout.layout_grid_section, null);
+        View convertView = LayoutInflater.from(getActivity()).inflate(R.layout.layout_movies_grid_section, null);
 
         convertView.setActivated(moviesGroupBean.isActive());
         convertView.setVisibility(moviesGroupBean.isActive() ? View.VISIBLE : View.GONE);
@@ -138,7 +139,7 @@ public abstract class AbstractMoviesListFragment extends Fragment {
             text.setHeight(0);
         }
 
-        MyGridView grid = (MyGridView)convertView.findViewById(R.id.grid);
+        MoviesGridView grid = (MoviesGridView)convertView.findViewById(R.id.grid);
         grid.setAdapter(moviesGroupBean.getAdapter());
         grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -158,7 +159,7 @@ public abstract class AbstractMoviesListFragment extends Fragment {
             public void onClick(View v) {
                 if(moviesGroupBean.getState() == MoviesGroupBean.STATE_LOADED){
                     moviesGroupBean.setCurrentPage(moviesGroupBean.getCurrentPage() + 1);
-                    if(!moviesGroupBean.validateLoadMoviesPageComplete(moviesGroupBean.getMovies().size())){
+                    if(!moviesGroupBean.validateLoadMoviesPageComplete()){
                         moviesGroupBean.setRemotePage(moviesGroupBean.getRemotePage() + 1);
                         moviesGroupBean.load(moviesListBean);
                     }

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/black"
-    tools:context="com.edson.nanodegree.movies.app.MoviesActivity">
+    tools:context="com.edson.nanodegree.movies.app.MoviesMainActivity">
 
     <LinearLayout
         android:orientation="vertical"
@@ -27,7 +27,7 @@
 
         </android.support.design.widget.AppBarLayout>
 
-        <include layout="@layout/fragment_movies_container" />
+        <include layout="@layout/fragment_movies_categories" />
 
     </LinearLayout>
 

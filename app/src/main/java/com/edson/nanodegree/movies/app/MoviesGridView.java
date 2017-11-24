@@ -7,16 +7,17 @@ import android.widget.GridView;
 /**
  * Created by edson on 13/09/2015.
  */
-public class MyGridView extends GridView {
-    public MyGridView(Context context) {
+public class MoviesGridView extends GridView {
+
+    public MoviesGridView(Context context) {
         super(context);
     }
 
-    public MyGridView(Context context, AttributeSet attrs) {
+    public MoviesGridView(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 
-    public MyGridView(Context context, AttributeSet attrs, int defStyle) {
+    public MoviesGridView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
     }
 
