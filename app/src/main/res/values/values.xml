@@ -38,13 +38,16 @@
     <string name="movie_api_sort_popularity_desc">popularity.desc</string>
     <string name="movie_api_sort_rate_desc">vote_average.desc</string>
     <string name="movie_api_primary_release_date_gte">primary_release_date.gte</string>
-    <string name="movie_api_release_date_gte">release_date.gte</string>
-    <string name="movie_api_release_date_lte">release_date.lte</string>
+    <string name="movie_api_primary_release_date_lte">primary_release_date.lte</string>
     <string name="movie_api_language_param">language</string>
     <string name="movie_api_language_value">en</string>
     <string name="movie_api_page_param">page</string>
     <string name="movie_api_genres_param">with_genres</string>
     <string name="movie_api_query_param">query</string>
+    <string name="movie_api_certification_country_param">certification_country</string>
+    <string name="movie_api_certification_country_value">US</string>
+    <string name="movie_api_certification_lte_param">certification.lte</string>
+    <string name="movie_api_certification_nc17_value">NC-17</string>
 
     <integer name="page_size_4">4</integer>
     <integer name="page_size_8">8</integer>

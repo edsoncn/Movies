@@ -25,7 +25,7 @@ public class LoadMoviesDiscoveryService extends AbstractLoadMovies {
     public static final String SORT_BY_RATE = "RATE";
     public static final String SORT_BY_UPCOMING = "UPCOMING";
     public static final String SORT_BY_NOW_PLAYING = "NOW_PLAYING";
-    public static final int NOW_PLAYING_LAST_WEEK = 3;
+    public static final int NOW_PLAYING_LASTED_WEEK = 4;
 
     private final SimpleDateFormat moviesApiDateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
 
@@ -40,15 +40,17 @@ public class LoadMoviesDiscoveryService extends AbstractLoadMovies {
     private String param_languageValue;
     private String param_genResParam;
     private String param_primaryReleaseDateGteParam;
-    private String param_releaseDateGteParam;
-    private String param_releaseDateLteParam;
+    private String param_primaryReleaseDateLteParam;
+    private String param_certificationCountryParam;
+    private String param_certificationCountryValue;
+    private String param_certificationLteParam;
+    private String param_certificationNC17Value;
 
     private String sortBySelected;
 
     private String sortValue;
     private String primaryReleaseDateGte;
-    private String releaseDateGte;
-    private String releaseDateLte;
+    private String primaryReleaseDateLte;
 
     public LoadMoviesDiscoveryService(Context context) {
         super(context);
@@ -67,8 +69,11 @@ public class LoadMoviesDiscoveryService extends AbstractLoadMovies {
         param_languageValue = context.getResources().getString(R.string.movie_api_language_value);
         param_genResParam = context.getResources().getString(R.string.movie_api_genres_param);
         param_primaryReleaseDateGteParam = context.getResources().getString(R.string.movie_api_primary_release_date_gte);
-        param_releaseDateGteParam = context.getResources().getString(R.string.movie_api_release_date_gte);
-        param_releaseDateLteParam = context.getResources().getString(R.string.movie_api_release_date_lte);
+        param_primaryReleaseDateLteParam = context.getResources().getString(R.string.movie_api_primary_release_date_lte);
+        param_certificationCountryParam = context.getResources().getString(R.string.movie_api_certification_country_param);
+        param_certificationCountryValue = context.getResources().getString(R.string.movie_api_certification_country_value);
+        param_certificationLteParam = context.getResources().getString(R.string.movie_api_certification_lte_param);
+        param_certificationNC17Value = context.getResources().getString(R.string.movie_api_certification_nc17_value);
     }
 
     @Override
@@ -84,11 +89,12 @@ public class LoadMoviesDiscoveryService extends AbstractLoadMovies {
         if(primaryReleaseDateGte != null){
             builder.appendQueryParameter(param_primaryReleaseDateGteParam, primaryReleaseDateGte);
         }
-        if(releaseDateGte != null){
-            builder.appendQueryParameter(param_releaseDateGteParam, releaseDateGte);
+        if(primaryReleaseDateLte != null){
+            builder.appendQueryParameter(param_primaryReleaseDateLteParam, primaryReleaseDateLte);
         }
-        if(releaseDateLte != null){
-            builder.appendQueryParameter(param_releaseDateLteParam, releaseDateLte);
+        if(isRate()){
+            builder.appendQueryParameter(param_certificationCountryParam, param_certificationCountryValue);
+            builder.appendQueryParameter(param_certificationLteParam, param_certificationNC17Value);
         }
         Log.i(LOG_TAG, "Url: " + builder.build().toString());
 
@@ -116,29 +122,27 @@ public class LoadMoviesDiscoveryService extends AbstractLoadMovies {
         this.sortBySelected = sortBySelected;
 
         Calendar now = Calendar.getInstance();
+        setNullAllValues();
 
         if (isPopularity()){
             sortValue = param_sortPopularityDescValue;
-            primaryReleaseDateGte = null;
-            releaseDateGte = null;
-            releaseDateLte = null;
         }else if (isRate()){
             sortValue = param_sortRateDescValue;
-            primaryReleaseDateGte = null;
-            releaseDateGte = null;
-            releaseDateLte = null;
         }else if (isUpcoming()) {
             sortValue = param_sortPopularityDescValue;
             primaryReleaseDateGte = moviesApiDateFormat.format(now.getTime());
-            releaseDateGte = null;
-            releaseDateLte = null;
         }else if (isNowPlaying()) {
             sortValue = param_sortPopularityDescValue;
-            primaryReleaseDateGte = null;
-            releaseDateLte = moviesApiDateFormat.format(now.getTime());
-            now.add(Calendar.DATE, NOW_PLAYING_LAST_WEEK * (-7));
-            releaseDateGte = moviesApiDateFormat.format(now.getTime());
+            primaryReleaseDateLte = moviesApiDateFormat.format(now.getTime());
+            now.add(Calendar.DATE, NOW_PLAYING_LASTED_WEEK * (-7));
+            primaryReleaseDateGte = moviesApiDateFormat.format(now.getTime());
         }
+    }
+
+    private void setNullAllValues(){
+        sortValue = null;
+        primaryReleaseDateGte = null;
+        primaryReleaseDateLte = null;
     }
 
     public String getSortBySelected() {
