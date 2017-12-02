@@ -21,7 +21,7 @@ import android.widget.TableRow;
 import android.widget.TextView;
 
 import com.edson.nanodegree.movies.bean.MovieBean;
-import com.edson.nanodegree.movies.service.AppDatabase;
+import com.edson.nanodegree.movies.helper.AppDatabase;
 import com.squareup.picasso.Picasso;
 
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -78,7 +78,6 @@ public class MoviesDetailActivity extends AppCompatActivity {
 
             final TableRow headRow = (TableRow) rootView.findViewById(R.id.head_row);
 
-            final LinearLayout descriptionsLayout = (LinearLayout) rootView.findViewById(R.id.descriptions_layout);
             final LinearLayout synopsisLayout = (LinearLayout) rootView.findViewById(R.id.synopsis_layout);
 
             final AtomicBoolean posterLoaded = new AtomicBoolean();
@@ -100,13 +99,10 @@ public class MoviesDetailActivity extends AppCompatActivity {
                     .fit()
                     .tag(getActivity())
                     .into(poster, new com.squareup.picasso.Callback() {
-                        @Override
-                        public void onSuccess() {
+                        @Override public void onSuccess() {
                             posterLoaded.set(true);
                         }
-
-                        @Override
-                        public void onError() {
+                        @Override public void onError() {
                         }
                     });
 
@@ -157,8 +153,7 @@ public class MoviesDetailActivity extends AppCompatActivity {
                 @Override
                 public void onClick(final View view) {
                     new AsyncTask<Void, Void, Boolean>() {
-                        @Override
-                        protected Boolean doInBackground(Void... params) {
+                        @Override protected Boolean doInBackground(Void... params) {
                             try {
                                 moviesDB.movieDao().insertAll(movie);
                                 return true;
@@ -167,9 +162,7 @@ public class MoviesDetailActivity extends AppCompatActivity {
                                 return false;
                             }
                         }
-
-                        @Override
-                        protected void onPostExecute(Boolean inserted) {
+                        @Override protected void onPostExecute(Boolean inserted) {
                             if (inserted) {
                                 Snackbar.make(view, "The movie was added to your favorites", Snackbar.LENGTH_LONG)
                                         .setAction("Action", null).show();
@@ -209,8 +202,7 @@ public class MoviesDetailActivity extends AppCompatActivity {
 
             if (id == R.id.action_remove){
                 new AsyncTask<Void, Void, Boolean>() {
-                    @Override
-                    protected Boolean doInBackground(Void... params) {
+                    @Override protected Boolean doInBackground(Void... params) {
                         try {
                             moviesDB.movieDao().delete(movie);
                             return true;
@@ -219,9 +211,7 @@ public class MoviesDetailActivity extends AppCompatActivity {
                             return false;
                         }
                     }
-
-                    @Override
-                    protected void onPostExecute(Boolean deleted) {
+                    @Override protected void onPostExecute(Boolean deleted) {
                         if (deleted) {
                             addFavorite.setVisibility(View.VISIBLE);
                             actionRemoveMenuItem.setEnabled(false);
@@ -241,18 +231,12 @@ public class MoviesDetailActivity extends AppCompatActivity {
 
         private void validateFavoriteMovie() {
             new AsyncTask<Void, Void, Boolean>() {
-                @Override
-                protected Boolean doInBackground(Void... params) {
+                @Override protected Boolean doInBackground(Void... params) {
                     return moviesDB.movieDao().findById(movie.getId()) != null;
                 }
-
-                @Override
-                protected void onPostExecute(Boolean exists) {
-                    if (!exists) {
-                        addFavorite.setVisibility(View.VISIBLE);
-                    }else{
-                        actionRemoveMenuItem.setEnabled(true);
-                    }
+                @Override protected void onPostExecute(Boolean exists) {
+                    if (!exists) addFavorite.setVisibility(View.VISIBLE);
+                    else actionRemoveMenuItem.setEnabled(true);
                 }
             }.execute();
 

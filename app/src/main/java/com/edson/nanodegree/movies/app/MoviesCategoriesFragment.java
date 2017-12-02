@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import com.edson.nanodegree.movies.bean.MoviesGroupBean;
 import com.edson.nanodegree.movies.bean.MoviesListBean;
+import com.edson.nanodegree.movies.factory.MoviesListFactory;
 import com.edson.nanodegree.movies.service.LoadMoviesDiscoveryService;
 import com.edson.nanodegree.movies.util.MoviesUtil;
 
@@ -60,43 +61,8 @@ public class MoviesCategoriesFragment extends AbstractMoviesListFragment {
     }
 
     @Override
-    protected MoviesListBean initMoviesListBean() {
-        return new MoviesListBean() {
-            @Override
-            public void init() {
-                List<MoviesGroupBean> moviesGroupBeans = new ArrayList<>();
-
-                // all genres
-                moviesGroupBeans.add(new MoviesGroupBean(getActivity(), "", null, getResources().getInteger(R.integer.page_size_8)));
-
-                // adding genres
-                for (int i = 0; i < genresValues.length; i++) {
-                    String name = genresNames[i];
-                    String id = genresValues[i];
-                    boolean isActive = genresValuesSelected.contains(id);
-
-                    Log.i(LOG_TAG, " - name: " + name + ", id: " + id + ", isActive: " + isActive);
-
-                    MoviesGroupBean moviesGroupBean = new MoviesGroupBean(getActivity(), name, Integer.parseInt(id), getResources().getInteger(R.integer.page_size_8));
-                    moviesGroupBean.setActive(isActive);
-                    moviesGroupBeans.add(moviesGroupBean);
-                }
-
-                this.setMoviesGroupBeans(moviesGroupBeans);
-            }
-
-            @Override
-            public void reset() {
-                super.reset();
-
-                // adding genres
-                for(int i = 1; i < getMoviesGroupBeans().size(); i++){
-                    boolean isActive = genresValuesSelected.contains(String.valueOf(getMoviesGroupBeans().get(i).getId()));
-                    getMoviesGroupBeans().get(i).setActive(isActive);
-                }
-            }
-
-        };
+    protected MoviesListBean createMoviesListBean() {
+        return MoviesListFactory.createMoviesListCategories(getContext(), genresNames, genresValues, genresValuesSelected);
     }
 
     @Override

@@ -1,13 +1,12 @@
 package com.edson.nanodegree.movies.app;
 
 import android.os.AsyncTask;
-import android.support.design.widget.Snackbar;
 import android.util.Log;
-import android.view.View;
 
 import com.edson.nanodegree.movies.bean.MoviesGroupBean;
 import com.edson.nanodegree.movies.bean.MoviesListBean;
-import com.edson.nanodegree.movies.service.AppDatabase;
+import com.edson.nanodegree.movies.factory.MoviesListFactory;
+import com.edson.nanodegree.movies.helper.AppDatabase;
 import com.edson.nanodegree.movies.service.LoadMoviesFavoriteService;
 
 import java.util.ArrayList;
@@ -27,16 +26,8 @@ public class MoviesFavoritesFragment extends AbstractMoviesListFragment {
     protected int totalResults;
 
     @Override
-    protected MoviesListBean initMoviesListBean() {
-        return new MoviesListBean() {
-            @Override
-            public void init() {
-                List<MoviesGroupBean> moviesGroupBeans = new ArrayList<>();
-                moviesGroupBeans.add(new MoviesGroupBean(getActivity(), "Favorites", null, getResources().getInteger(R.integer.page_size_12)));
-
-                this.setMoviesGroupBeans(moviesGroupBeans);
-            }
-        };
+    protected MoviesListBean createMoviesListBean() {
+        return MoviesListFactory.createMoviesListFavorites(getContext());
     }
 
     @Override

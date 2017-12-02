@@ -1,4 +1,4 @@
-package com.edson.nanodegree.movies.service;
+package com.edson.nanodegree.movies.task;
 
 import android.os.AsyncTask;
 import android.util.Log;

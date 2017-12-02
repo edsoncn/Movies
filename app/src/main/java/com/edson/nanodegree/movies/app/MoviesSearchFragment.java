@@ -8,6 +8,7 @@ import android.view.MenuItem;
 
 import com.edson.nanodegree.movies.bean.MoviesGroupBean;
 import com.edson.nanodegree.movies.bean.MoviesListBean;
+import com.edson.nanodegree.movies.factory.MoviesListFactory;
 import com.edson.nanodegree.movies.service.LoadMoviesSearchService;
 
 import java.util.ArrayList;
@@ -25,16 +26,8 @@ public class MoviesSearchFragment extends AbstractMoviesListFragment {
     private LoadMoviesSearchService loadMovies;
 
     @Override
-    protected MoviesListBean initMoviesListBean() {
-        return new MoviesListBean() {
-            @Override
-            public void init() {
-                List<MoviesGroupBean> moviesGroupBeans = new ArrayList<>();
-                moviesGroupBeans.add(new MoviesGroupBean(getActivity(), "Search", null, getResources().getInteger(R.integer.page_size_12)));
-
-                this.setMoviesGroupBeans(moviesGroupBeans);
-            }
-        };
+    protected MoviesListBean createMoviesListBean() {
+        return MoviesListFactory.createMoviesListSearch(getContext());
     }
 
     @Override

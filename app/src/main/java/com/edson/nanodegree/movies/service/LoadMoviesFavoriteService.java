@@ -5,6 +5,7 @@ import android.util.Log;
 
 import com.edson.nanodegree.movies.bean.MovieBean;
 import com.edson.nanodegree.movies.bean.MoviesGroupBean;
+import com.edson.nanodegree.movies.helper.AppDatabase;
 
 import java.util.List;
 

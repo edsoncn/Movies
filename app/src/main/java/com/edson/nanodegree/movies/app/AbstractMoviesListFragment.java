@@ -76,7 +76,7 @@ public abstract class AbstractMoviesListFragment extends Fragment {
     }
 
     public void init(){
-        moviesListBean = initMoviesListBean();
+        moviesListBean = createMoviesListBean();
         moviesListBean.init();
 
         initViews();
@@ -104,7 +104,7 @@ public abstract class AbstractMoviesListFragment extends Fragment {
 
     }
 
-    protected abstract MoviesListBean initMoviesListBean();
+    protected abstract MoviesListBean createMoviesListBean();
 
     public void loadMoviesGroupBeansInit() {
         scrollIndex = -1;
