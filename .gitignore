@@ -1,7 +1,42 @@
-.gradle
-/local.properties
-/.idea/workspace.xml
-/.idea/libraries
+# Built application files
+*.apk
+*.ap_
+*.aab
+
+# Files for the ART/Dalvik VM
+*.dex
+
+# Java class files
+*.class
+
+# Generated build files
+bin/
+gen/
+out/
+.gradle/
+build/
+
+# Local configuration file (contains your local SDK path)
+local.properties
+
+# Log Files
+*.log
+
+# Android Studio / IntelliJ files
+*.iml
+.idea/
+.navigation/
+captures/
+
+# Keystores and signing files (Never commit passwords/keys!)
+*.jks
+*.keystore
+*.pk8
+*.pem
+
+# Crashlytics / Google Services config (Optional: Hide if project is open-source)
+# google-services.json
+
+# OS generated files
 .DS_Store
-/build
-/captures
+Thumbs.db
