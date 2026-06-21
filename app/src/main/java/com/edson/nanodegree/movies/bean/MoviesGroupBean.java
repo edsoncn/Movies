@@ -5,6 +5,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
+import androidx.lifecycle.LifecycleOwner;
+
 import com.edson.nanodegree.movies.adapter.CustomMoviesGridViewAdapter;
 import com.edson.nanodegree.movies.task.MoviesGroupClientRestTask;
 
@@ -71,9 +73,9 @@ public class MoviesGroupBean {
         prevTotalMovies = -1;
     }
 
-    public void load(MoviesListBean moviesListBean){
+    public void load(MoviesListBean moviesListBean, Context context, LifecycleOwner lifecycleOwner){
         state = STATE_LOADED;
-        new MoviesGroupClientRestTask(moviesListBean).execute(this);
+        new MoviesGroupClientRestTask(moviesListBean, context, lifecycleOwner).execute(this);
     }
 
     /**
@@ -130,6 +132,12 @@ public class MoviesGroupBean {
         }
 
         return isComplete;
+    }
+
+    public boolean noResults(){
+        int totalMovies = movies.size() + moviesTemp.size();
+
+        return prevTotalMovies == totalMovies || totalMovies == 0 ;
     }
 
     public void notifyDataSetChanged(){

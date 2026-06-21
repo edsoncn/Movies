@@ -1,7 +1,10 @@
 package com.edson.nanodegree.movies.app;
 
-import android.support.v4.view.MenuItemCompat;
-import android.support.v7.widget.SearchView;
+import androidx.annotation.NonNull;
+import androidx.core.view.MenuItemCompat;
+import androidx.appcompat.widget.SearchView;
+
+import android.content.Context;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -11,8 +14,7 @@ import com.edson.nanodegree.movies.bean.MoviesListBean;
 import com.edson.nanodegree.movies.factory.MoviesListFactory;
 import com.edson.nanodegree.movies.service.LoadMoviesSearchService;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Objects;
 
 /**
  * Created by edson on 24/10/2017.
@@ -27,7 +29,7 @@ public class MoviesSearchFragment extends AbstractMoviesListFragment {
 
     @Override
     protected MoviesListBean createMoviesListBean() {
-        return MoviesListFactory.createMoviesListSearch(getContext());
+        return MoviesListFactory.createMoviesListSearch(getContext(), getViewLifecycleOwner());
     }
 
     @Override
@@ -46,12 +48,12 @@ public class MoviesSearchFragment extends AbstractMoviesListFragment {
     }
 
     @Override
-    public void loadMoviesGroupBeansInit() {
+    public void loadMoviesGroupBeansInit(Context context) {
         MoviesGroupBean searchMoviesBean = moviesListBean.getMoviesGroupBeans().get(0);
         searchMoviesBean.setTitle(searchMoviesBean.getGroupName() + " by '" + loadMovies.getSearchTerm() + "'");
         floatingHeader.setText(moviesListBean.getMoviesGroupBeans().get(0).getTitle());
 
-        super.loadMoviesGroupBeansInit();
+        super.loadMoviesGroupBeansInit(getContext());
 
     }
 
@@ -80,24 +82,27 @@ public class MoviesSearchFragment extends AbstractMoviesListFragment {
 
         });
 
-        searchView.setOnCloseListener(new SearchView.OnCloseListener() {
-            @Override
-            public boolean onClose() {
-                getActivity().getSupportFragmentManager().popBackStack();
-                return false;
-            }
+        searchView.setOnCloseListener(() -> {
+            requireActivity().getSupportFragmentManager().popBackStack();
+            return false;
         });
 
     }
 
     @Override
-    public void onPrepareOptionsMenu(Menu menu) {
+    public void onPrepareOptionsMenu(@NonNull Menu menu) {
         super.onPrepareOptionsMenu(menu);
 
-        searchView.setIconified(false);
-        searchView.requestFocusFromTouch();
+        if (searchView != null) {
+            searchView.setIconified(false);
+            searchView.requestFocusFromTouch();
+        }
 
-        MenuItemCompat.expandActionView(searchViewItem);
+        if (searchViewItem != null) {
+            // MenuItemCompat.expandActionView is deprecated
+            // Use the MenuItem's native expandActionView() method instead
+            searchViewItem.expandActionView();
+        }
     }
 
 }

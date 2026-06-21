@@ -1,5 +1,6 @@
 package com.edson.nanodegree.movies.app;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -62,7 +63,8 @@ public class MoviesCategoriesFragment extends AbstractMoviesListFragment {
 
     @Override
     protected MoviesListBean createMoviesListBean() {
-        return MoviesListFactory.createMoviesListCategories(getContext(), genresNames, genresValues, genresValuesSelected);
+        return MoviesListFactory.createMoviesListCategories(getContext(), getViewLifecycleOwner(),
+                genresNames, genresValues, genresValuesSelected);
     }
 
     @Override
@@ -78,7 +80,7 @@ public class MoviesCategoriesFragment extends AbstractMoviesListFragment {
     }
 
     @Override
-    public void loadMoviesGroupBeansInit() {
+    public void loadMoviesGroupBeansInit(Context context) {
         String headerTitle = "";
         if(loadMovies.isPopularity()){
             headerTitle = getResources().getString(R.string.app_most_popular);
@@ -100,7 +102,7 @@ public class MoviesCategoriesFragment extends AbstractMoviesListFragment {
             text.setText(moviesListBean.getMoviesGroupBeans().get(i).getTitle());
         }
 
-        super.loadMoviesGroupBeansInit();
+        super.loadMoviesGroupBeansInit(context);
 
     }
 

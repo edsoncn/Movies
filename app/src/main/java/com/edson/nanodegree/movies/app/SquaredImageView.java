@@ -6,7 +6,7 @@ import android.view.View;
 import android.widget.TableRow;
 
 /** An image view which always remains square with respect to its width. */
-final public class SquaredImageView extends android.support.v7.widget.AppCompatImageView {
+final public class SquaredImageView extends androidx.appcompat.widget.AppCompatImageView {
 
     private View content;
     private Integer heightPlus;

@@ -1,13 +1,15 @@
 package com.edson.nanodegree.movies.app;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.os.AsyncTask;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v4.app.Fragment;
+
+import com.edson.nanodegree.movies.helper.CoroutineTask;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
+import androidx.fragment.app.Fragment;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -37,17 +39,12 @@ public class MoviesDetailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movies_detail);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbarMoviesDetail);
+        Toolbar toolbar = findViewById(R.id.toolbarMoviesDetail);
         setSupportActionBar(toolbar);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onBackPressed();
-            }
-        });
+        toolbar.setNavigationOnClickListener(v -> getOnBackPressedDispatcher().onBackPressed());
     }
 
     public static class MoviesDetailFragment extends Fragment {
@@ -62,6 +59,7 @@ public class MoviesDetailActivity extends AppCompatActivity {
         private FloatingActionButton addFavorite;
         private MenuItem actionRemoveMenuItem;
 
+        @SuppressLint("StaticFieldLeak")
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
@@ -76,13 +74,13 @@ public class MoviesDetailActivity extends AppCompatActivity {
 
             this.setHasOptionsMenu(true);
 
-            final TableRow headRow = (TableRow) rootView.findViewById(R.id.head_row);
+            final TableRow headRow = rootView.findViewById(R.id.head_row);
 
-            final LinearLayout synopsisLayout = (LinearLayout) rootView.findViewById(R.id.synopsis_layout);
+            final LinearLayout synopsisLayout = rootView.findViewById(R.id.synopsis_layout);
 
             final AtomicBoolean posterLoaded = new AtomicBoolean();
 
-            final SquaredImageView poster = (SquaredImageView) rootView.findViewById(R.id.poster);
+            final SquaredImageView poster = rootView.findViewById(R.id.poster);
             poster.setScaleType(CENTER_CROP);
             //Set tableRow for resize height when image load
             poster.setContent(headRow);
@@ -106,21 +104,19 @@ public class MoviesDetailActivity extends AppCompatActivity {
                         }
                     });
 
-            final SquaredImageView posterFull = (SquaredImageView) rootView.findViewById(R.id.poster_full);
+            final SquaredImageView posterFull = rootView.findViewById(R.id.poster_full);
             posterFull.setScaleType(CENTER_CROP);
             posterFull.setHeightPlus(4);
             posterFull.setVisibility(View.GONE);
 
-            poster.setOnClickListener(new View.OnClickListener() {
-                public void onClick(View v) {
-                    if (posterLoaded.get()) {
-                        headRow.setVisibility(View.GONE);
-                        synopsisLayout.setVisibility(View.GONE);
-                        if (posterFull.getDrawable() == null) {
-                            posterFull.setImageDrawable(poster.getDrawable());
-                        }
-                        posterFull.setVisibility(View.VISIBLE);
+            poster.setOnClickListener(v -> {
+                if (posterLoaded.get()) {
+                    headRow.setVisibility(View.GONE);
+                    synopsisLayout.setVisibility(View.GONE);
+                    if (posterFull.getDrawable() == null) {
+                        posterFull.setImageDrawable(poster.getDrawable());
                     }
+                    posterFull.setVisibility(View.VISIBLE);
                 }
             });
 
@@ -132,50 +128,47 @@ public class MoviesDetailActivity extends AppCompatActivity {
                 }
             });
 
-            TextView title = (TextView) rootView.findViewById(R.id.title);
+            TextView title = rootView.findViewById(R.id.title);
             title.setText(movie.getTitle());
 
-            RatingBar ratingBar = (RatingBar) rootView.findViewById(R.id.ratingBar);
+            RatingBar ratingBar = rootView.findViewById(R.id.ratingBar);
             ratingBar.setRating(movie.getRating() / 2);
             Log.i(LOG_TAG, movie.getTitle() + ": " + ratingBar.getRating() + ", " + movie.getRating());
 
-            TextView release = (TextView) rootView.findViewById(R.id.release);
+            TextView release = rootView.findViewById(R.id.release);
             String releaseFormat = movie.getReleaseFormat(
                     getResources().getString(R.string.app_detail_release_format8601),
                     getResources().getString(R.string.app_detail_release_format));
             release.setText(releaseFormat != null ? releaseFormat : getResources().getString(R.string.app_detail_release_none));
 
-            TextView synopsis = (TextView) rootView.findViewById(R.id.synopsis_detail);
+            TextView synopsis = rootView.findViewById(R.id.synopsis_detail);
             synopsis.setText(movie.getSynopsis());
 
-            addFavorite = (FloatingActionButton) rootView.findViewById(R.id.addFavorite);
-            addFavorite.setOnClickListener(new View.OnClickListener() {
+            addFavorite = rootView.findViewById(R.id.addFavorite);
+            addFavorite.setOnClickListener(view -> new CoroutineTask<Void, Boolean>(getViewLifecycleOwner()) {
                 @Override
-                public void onClick(final View view) {
-                    new AsyncTask<Void, Void, Boolean>() {
-                        @Override protected Boolean doInBackground(Void... params) {
-                            try {
-                                moviesDB.movieDao().insertAll(movie);
-                                return true;
-                            } catch (Exception e) {
-                                Log.i(LOG_TAG, "There was an error trying to insert the movie to favorites: " + e.getMessage());
-                                return false;
-                            }
-                        }
-                        @Override protected void onPostExecute(Boolean inserted) {
-                            if (inserted) {
-                                Snackbar.make(view, "The movie was added to your favorites", Snackbar.LENGTH_LONG)
-                                        .setAction("Action", null).show();
-                                addFavorite.setVisibility(View.GONE);
-                                actionRemoveMenuItem.setEnabled(true);
-                            } else {
-                                Snackbar.make(view, "An error occur try it later", Snackbar.LENGTH_LONG)
-                                        .setAction("Action", null).show();
-                            }
-                        }
-                    }.execute();
+                protected Boolean doInBackground(Void v) {
+                    try {
+                        moviesDB.movieDao().insertAll(movie);
+                        return true;
+                    } catch (Exception e) {
+                        Log.i(LOG_TAG, "There was an error trying to insert the movie to favorites: " + e.getMessage());
+                        return false;
+                    }
                 }
-            });
+                @Override
+                protected void onPostExecute(Boolean inserted) {
+                    if (inserted) {
+                        Snackbar.make(view, "The movie was added to your favorites", Snackbar.LENGTH_LONG)
+                                .setAction("Action", null).show();
+                        addFavorite.setVisibility(View.GONE);
+                        actionRemoveMenuItem.setEnabled(true);
+                    } else {
+                        Snackbar.make(view, "An error occur try it later", Snackbar.LENGTH_LONG)
+                                .setAction("Action", null).show();
+                    }
+                }
+            }.execute(null));
 
             return rootView;
         }
@@ -201,8 +194,9 @@ public class MoviesDetailActivity extends AppCompatActivity {
             Log.i(LOG_TAG, "ItemId:" + id);
 
             if (id == R.id.action_remove){
-                new AsyncTask<Void, Void, Boolean>() {
-                    @Override protected Boolean doInBackground(Void... params) {
+                new CoroutineTask<Void, Boolean>(getViewLifecycleOwner()) {
+                    @Override
+                    protected Boolean doInBackground(Void v) {
                         try {
                             moviesDB.movieDao().delete(movie);
                             return true;
@@ -211,7 +205,8 @@ public class MoviesDetailActivity extends AppCompatActivity {
                             return false;
                         }
                     }
-                    @Override protected void onPostExecute(Boolean deleted) {
+                    @Override
+                    protected void onPostExecute(Boolean deleted) {
                         if (deleted) {
                             addFavorite.setVisibility(View.VISIBLE);
                             actionRemoveMenuItem.setEnabled(false);
@@ -222,7 +217,7 @@ public class MoviesDetailActivity extends AppCompatActivity {
                                     .setAction("Action", null).show();
                         }
                     }
-                }.execute();
+                }.execute(null);
                 return true;
             }
 
@@ -230,16 +225,17 @@ public class MoviesDetailActivity extends AppCompatActivity {
         }
 
         private void validateFavoriteMovie() {
-            new AsyncTask<Void, Void, Boolean>() {
-                @Override protected Boolean doInBackground(Void... params) {
+            new CoroutineTask<Void, Boolean>(getViewLifecycleOwner()) {
+                @Override
+                protected Boolean doInBackground(Void v) {
                     return moviesDB.movieDao().findById(movie.getId()) != null;
                 }
-                @Override protected void onPostExecute(Boolean exists) {
+                @Override
+                protected void onPostExecute(Boolean exists) {
                     if (!exists) addFavorite.setVisibility(View.VISIBLE);
                     else actionRemoveMenuItem.setEnabled(true);
                 }
-            }.execute();
-
+            }.execute(null);
         }
 
     }

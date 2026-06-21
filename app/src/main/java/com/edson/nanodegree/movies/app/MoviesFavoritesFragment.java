@@ -7,6 +7,7 @@ import com.edson.nanodegree.movies.bean.MoviesGroupBean;
 import com.edson.nanodegree.movies.bean.MoviesListBean;
 import com.edson.nanodegree.movies.factory.MoviesListFactory;
 import com.edson.nanodegree.movies.helper.AppDatabase;
+import com.edson.nanodegree.movies.helper.CoroutineTask;
 import com.edson.nanodegree.movies.service.LoadMoviesFavoriteService;
 
 import java.util.ArrayList;
@@ -27,7 +28,7 @@ public class MoviesFavoritesFragment extends AbstractMoviesListFragment {
 
     @Override
     protected MoviesListBean createMoviesListBean() {
-        return MoviesListFactory.createMoviesListFavorites(getContext());
+        return MoviesListFactory.createMoviesListFavorites(getContext(), getViewLifecycleOwner());
     }
 
     @Override
@@ -56,9 +57,9 @@ public class MoviesFavoritesFragment extends AbstractMoviesListFragment {
     }
 
     public void validateQuantityChanged(){
-        new AsyncTask<Void, Void, Integer>() {
+        new CoroutineTask<Void, Integer>(getViewLifecycleOwner()) {
             @Override
-            protected Integer doInBackground(Void... params) {
+            protected Integer doInBackground(Void v) {
                 try {
                     return moviesDB.movieDao().count();
                 } catch (Exception e) {
@@ -66,7 +67,6 @@ public class MoviesFavoritesFragment extends AbstractMoviesListFragment {
                     return -1;
                 }
             }
-
             @Override
             protected void onPostExecute(Integer count) {
                 if (count >= 0) {
@@ -77,13 +77,13 @@ public class MoviesFavoritesFragment extends AbstractMoviesListFragment {
                     totalResults = count;
                 }
             }
-        }.execute();
+        }.execute(null);
     }
 
     public void setTotalResults(){
-        new AsyncTask<Void, Void, Integer>() {
+        new CoroutineTask<Void, Integer>(getViewLifecycleOwner()) {
             @Override
-            protected Integer doInBackground(Void... params) {
+            protected Integer doInBackground(Void v) {
                 try {
                     return moviesDB.movieDao().count();
                 } catch (Exception e) {
@@ -91,12 +91,11 @@ public class MoviesFavoritesFragment extends AbstractMoviesListFragment {
                     return -1;
                 }
             }
-
             @Override
             protected void onPostExecute(Integer count) {
                 totalResults = count;
             }
-        }.execute();
+        }.execute(null);
     }
 
 }

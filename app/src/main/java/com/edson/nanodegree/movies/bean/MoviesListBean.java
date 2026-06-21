@@ -1,6 +1,9 @@
 package com.edson.nanodegree.movies.bean;
 
+import android.content.Context;
 import android.util.Log;
+
+import androidx.lifecycle.LifecycleOwner;
 
 import com.edson.nanodegree.movies.service.LoadMovies;
 
@@ -17,8 +20,10 @@ public abstract class MoviesListBean {
     private List<MoviesGroupBean> moviesGroupBeans;
     private int index;
     private LoadMovies loadMovies;
+    private final LifecycleOwner lifecycleOwner;
 
-    public MoviesListBean(){
+    public MoviesListBean(LifecycleOwner lifecycleOwner){
+        this.lifecycleOwner = lifecycleOwner;
     }
 
     public abstract void init();
@@ -28,12 +33,12 @@ public abstract class MoviesListBean {
             moviesGroupBean.reset();
         }
     }
-    public void loadMoviesGroupBeansInit(){
+    public void loadMoviesGroupBeansInit(Context context){
         index = -1;
-        loadMoviesGroupBeansInChain();
+        loadMoviesGroupBeansInChain(context);
     }
 
-    public void loadMoviesGroupBeansInChain(){
+    public void loadMoviesGroupBeansInChain(Context context){
         if(index < moviesGroupBeans.size() - 1) {
             index++;
 
@@ -42,9 +47,9 @@ public abstract class MoviesListBean {
 
             if(moviesGroupBean.isActive()) {
                 moviesGroupBean.setRemotePage(moviesGroupBean.getRemotePage() + 1);
-                moviesGroupBean.load(this);
+                moviesGroupBean.load(this, context, lifecycleOwner);
             }else{
-                loadMoviesGroupBeansInChain();
+                loadMoviesGroupBeansInChain(context);
             }
         }
     }

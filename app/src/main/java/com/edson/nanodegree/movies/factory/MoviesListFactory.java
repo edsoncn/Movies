@@ -3,6 +3,8 @@ package com.edson.nanodegree.movies.factory;
 import android.content.Context;
 import android.util.Log;
 
+import androidx.lifecycle.LifecycleOwner;
+
 import com.edson.nanodegree.movies.app.R;
 import com.edson.nanodegree.movies.bean.MoviesGroupBean;
 import com.edson.nanodegree.movies.bean.MoviesListBean;
@@ -19,8 +21,9 @@ public class MoviesListFactory {
 
     private static final String LOG_TAG = MoviesListFactory.class.getSimpleName();
 
-    public static MoviesListBean createMoviesListCategories(final Context context, final String[] genresNames, final String[] genresValues, final Set<String> genresValuesSelected){
-        return new MoviesListBean() {
+    public static MoviesListBean createMoviesListCategories(final Context context, LifecycleOwner lifecycleOwner,
+            final String[] genresNames, final String[] genresValues, final Set<String> genresValuesSelected){
+        return new MoviesListBean(lifecycleOwner) {
             @Override
             public void init() {
                 List<MoviesGroupBean> moviesGroupBeans = new ArrayList<>();
@@ -58,8 +61,8 @@ public class MoviesListFactory {
         };
     }
 
-    public static MoviesListBean createMoviesListSearch(final Context context){
-        return new MoviesListBean() {
+    public static MoviesListBean createMoviesListSearch(final Context context, LifecycleOwner lifecycleOwner){
+        return new MoviesListBean(lifecycleOwner) {
             @Override
             public void init() {
                 List<MoviesGroupBean> moviesGroupBeans = new ArrayList<>();
@@ -70,8 +73,8 @@ public class MoviesListFactory {
         };
     }
 
-    public static MoviesListBean createMoviesListFavorites(final Context context){
-        return new MoviesListBean() {
+    public static MoviesListBean createMoviesListFavorites(final Context context, LifecycleOwner lifecycleOwner){
+        return new MoviesListBean(lifecycleOwner) {
             @Override
             public void init() {
                 List<MoviesGroupBean> moviesGroupBeans = new ArrayList<>();

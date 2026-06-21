@@ -30,8 +30,12 @@ public class LoadMoviesSearchService extends AbstractLoadMovies{
         super(context);
     }
 
+    private Context context;
+
     @Override
     void initParameters(Context context) {
+        this.context = context;
+
         param_urlBase = context.getResources().getString(R.string.movie_api_base_search_url);
         param_apiKeyParam = context.getResources().getString(R.string.movie_api_key_param);
         param_apiKeyValue = context.getResources().getString(R.string.movie_api_key_value);

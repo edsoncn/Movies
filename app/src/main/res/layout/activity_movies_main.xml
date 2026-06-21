@@ -1,25 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:ads="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
-    tools:openDrawer="start">
+    android:orientation="vertical">
 
-    <include
-        layout="@layout/app_bar_movies_main"
+    <!-- 1. The DrawerLayout takes the available space -->
+    <androidx.drawerlayout.widget.DrawerLayout
+        android:id="@+id/drawer_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-
-    <android.support.design.widget.NavigationView
-        android:id="@+id/nav_view"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_gravity="start"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:fitsSystemWindows="true"
-        app:headerLayout="@layout/nav_header_movies_main"
-        app:menu="@menu/drawer_menu_movies_main" />
+        tools:openDrawer="start">
 
-</android.support.v4.widget.DrawerLayout>
+        <!-- 2. MAIN CONTENT AREA -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <include
+                android:id="@+id/main_content_include"
+                layout="@layout/app_bar_movies_main"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <!-- 3. NAVIGATION DRAWER (Slide-out Menu) -->
+        <com.google.android.material.navigation.NavigationView
+            android:id="@+id/nav_view"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            android:fitsSystemWindows="true"
+            app:headerLayout="@layout/nav_header_movies_main"
+            app:menu="@menu/drawer_menu_movies_main" />
+
+    </androidx.drawerlayout.widget.DrawerLayout>
+
+    <!-- 4. The AdView is fixed at the very bottom -->
+    <com.google.android.gms.ads.AdView
+        android:id="@+id/adView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        ads:adSize="BANNER"
+        ads:adUnitId="ca-app-pub-4830109269722710/6946584351"
+        android:layout_marginBottom="4dp"
+        android:layout_marginTop="4dp"/>
+
+</LinearLayout>

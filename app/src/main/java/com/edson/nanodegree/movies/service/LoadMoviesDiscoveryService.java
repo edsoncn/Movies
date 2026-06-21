@@ -52,12 +52,16 @@ public class LoadMoviesDiscoveryService extends AbstractLoadMovies {
     private String primaryReleaseDateGte;
     private String primaryReleaseDateLte;
 
+    private Context context;
+
     public LoadMoviesDiscoveryService(Context context) {
         super(context);
     }
 
     @Override
     public void initParameters(Context context) {
+        this.context = context;
+
         param_urlBase = context.getResources().getString(R.string.movie_api_base_discovery_url);
         param_apiKeyParam = context.getResources().getString(R.string.movie_api_key_param);
         param_apiKeyValue = context.getResources().getString(R.string.movie_api_key_value);

@@ -26,14 +26,14 @@
     <string name="app_detail_release_format">EEEE, MMMM d, yyyy</string>
     <string name="app_detail_synopsis">Synopsis: </string>
 
-    <string name="movie_api_base_image_url">http://image.tmdb.org/t/p/w185//</string>
-    <string name="movie_api_base_image_url_500">http://image.tmdb.org/t/p/w500//</string>
-    <string name="movie_api_base_discovery_url">http://api.themoviedb.org/3/discover/movie</string>
-    <string name="movie_api_base_genres_url">http://api.themoviedb.org/3/genre/movie/list</string>
+    <string name="movie_api_base_image_url">https://image.tmdb.org/t/p/w185//</string>
+    <string name="movie_api_base_image_url_500">https://image.tmdb.org/t/p/w500//</string>
+    <string name="movie_api_base_discovery_url">https://api.themoviedb.org/3/discover/movie</string>
+    <string name="movie_api_base_genres_url">https://api.themoviedb.org/3/genre/movie/list</string>
     <string name="movie_api_base_search_url">https://api.themoviedb.org/3/search/movie</string>
 
     <string name="movie_api_key_param">api_key</string>
-    <string name="movie_api_key_value">ba775afafc2f34aec47a89f91dd2ed10</string>
+    <string name="movie_api_key_value">7a57cc888b988bba709539b65b663152</string>
     <string name="movie_api_sort_param">sort_by</string>
     <string name="movie_api_sort_popularity_desc">popularity.desc</string>
     <string name="movie_api_sort_rate_desc">vote_average.desc</string>
