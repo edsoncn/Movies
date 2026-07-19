@@ -1,0 +1,67 @@
+<resources>
+    <string name="app_description">استكشف عالم السينما بطريقة مختلفة</string>
+
+    <string name="navigation_drawer_open">فتح درج التنقل</string>
+    <string name="navigation_drawer_close">إغلاق درج التنقل</string>
+
+    <string name="title_movie_categories">فئات الأفلام</string>
+    <string name="title_movie_detail">تفاصيل الفيلم</string>
+    <string name="hello_world">مرحباً بالعالم!</string>
+    <string name="action_settings">الإعدادات</string>
+    <string name="menu_sort">فرز حسب</string>
+    <string name="menu_sort_by_popularity">الأكثر شعبية</string>
+    <string name="menu_sort_by_rate">الأعلى تقييماً</string>
+    <string name="menu_sort_by_upcoming">قريباً</string>
+    <string name="menu_sort_by_now_playing">يعرض الآن</string>
+
+    <string name="app_most_popular">الأكثر شعبية</string>
+    <string name="app_most_rate">الأعلى تقييماً</string>
+    <string name="app_upcoming">قريباً</string>
+    <string name="app_now_playing">يعرض الآن</string>
+    <string name="app_detail_rating">التقييم: </string>
+    <string name="app_detail_release">تاريخ الإصدار: </string>
+    <string name="app_detail_release_none">لم يتم العثور على تاريخ الإصدار.</string>
+    <string name="app_detail_synopsis">ملخص القصة: </string>
+
+    <string name="movie_api_sortby_genres">{0} في {1}</string>
+
+    <string name="movie_api_genres_pref_action">أكشن</string>
+    <string name="movie_api_genres_pref_drama">دراما</string>
+    <string name="movie_api_genres_pref_science">خيال علمي</string>
+    <string name="movie_api_genres_pref_comedy">كوميدي</string>
+    <string name="movie_api_genres_pref_animation">رسوم متحركة</string>
+    <string name="movie_api_genres_pref_horror">رعب</string>
+    <string name="movie_api_genres_pref_documentary">وثائقي</string>
+    <string name="movie_api_genres_pref_fantasy">فانتازيا</string>
+    <string name="movie_api_genres_pref_romance">رومانسي</string>
+    <string name="movie_api_genres_pref_war">حربي</string>
+
+    <string name="nav_name_settings">الإعدادات</string>
+    <string name="nav_name_search">بحث</string>
+    <string name="nav_name_favorite">المفضلة</string>
+
+    <string name="settings_header">الإعدادات</string>
+
+    <string name="preference_general_group">عام</string>
+    <string name="preference_about_group">حول التطبيق</string>
+    <string name="preference_genres_list_title">الفئات المفضلة</string>
+    <string name="preference_genres_list_summary">اختر الفئات التي تريد رؤيتها في الشاشة الرئيسية</string>
+    <string name="preference_about_version_summary">الإصدار الحالي: {0}</string>
+
+    <string name="movies_detail_header">التفاصيل</string>
+    <string name="movies_detail_action_remove">إزالة من المفضلة</string>
+
+    <string name="search_title">بحث</string>
+    <string name="search_hint">"مثال: سبايدر مان"</string>
+
+    <string name="movies_favorites_header">قائمة مفضلاتي</string>
+
+    <string name="preference_language_title">لغة التطبيق</string>
+    <string name="preference_language_summary">اختر لغة عناوين الأفلام والأوصاف</string>
+
+    <string-array name="preference_language_entries">
+        <item>اللغة المحلية</item>
+        <item>English</item>
+    </string-array>
+
+</resources>

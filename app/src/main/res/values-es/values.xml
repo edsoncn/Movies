@@ -1,0 +1,66 @@
+<resources>
+    <string name="app_description">Explora el mundo del cine de una manera diferente</string>
+
+    <string name="navigation_drawer_open">Abrir panel de navegación</string>
+    <string name="navigation_drawer_close">Cerrar panel de navegación</string>
+
+    <string name="title_movie_categories">Categorías de Películas</string>
+    <string name="title_movie_detail">Detalles de la Película</string>
+    <string name="hello_world">¡Hola mundo!</string>
+    <string name="action_settings">Ajustes</string>
+    <string name="menu_sort">Ordenar por</string>
+    <string name="menu_sort_by_popularity">Más populares</string>
+    <string name="menu_sort_by_rate">Mejor valoradas</string>
+    <string name="menu_sort_by_upcoming">Próximamente</string>
+    <string name="menu_sort_by_now_playing">En cartelera</string>
+    <string name="app_most_popular">Más populares</string>
+    <string name="app_most_rate">Mejor valoradas</string>
+    <string name="app_upcoming">Próximamente</string>
+    <string name="app_now_playing">En cartelera</string>
+    <string name="app_detail_rating">Valoración: </string>
+    <string name="app_detail_release">Estreno: </string>
+    <string name="app_detail_release_none">No se encontró fecha de estreno.</string>
+    <string name="app_detail_synopsis">Sinopsis: </string>
+
+    <string name="movie_api_sortby_genres">{0} en {1}</string>
+
+    <string name="movie_api_genres_pref_action">Acción</string>
+    <string name="movie_api_genres_pref_drama">Drama</string>
+    <string name="movie_api_genres_pref_science">Ciencia Ficción</string>
+    <string name="movie_api_genres_pref_comedy">Comedia</string>
+    <string name="movie_api_genres_pref_animation">Animación</string>
+    <string name="movie_api_genres_pref_horror">Terror</string>
+    <string name="movie_api_genres_pref_documentary">Documental</string>
+    <string name="movie_api_genres_pref_fantasy">Fantasía</string>
+    <string name="movie_api_genres_pref_romance">Romance</string>
+    <string name="movie_api_genres_pref_war">Bélica</string>
+
+    <string name="nav_name_settings">Ajustes</string>
+    <string name="nav_name_search">Buscar</string>
+    <string name="nav_name_favorite">Favoritos</string>
+
+    <string name="settings_header">Ajustes</string>
+
+    <string name="preference_general_group">General</string>
+    <string name="preference_about_group">Acerca de</string>
+    <string name="preference_genres_list_title">Categorías preferidas</string>
+    <string name="preference_genres_list_summary">Elige las categorías que quieres ver en la pantalla principal</string>
+    <string name="preference_about_version_summary">Versión actual: {0}</string>
+
+    <string name="movies_detail_header">Detalles</string>
+    <string name="movies_detail_action_remove">Quitar de favoritos</string>
+
+    <string name="search_title">Buscar</string>
+    <string name="search_hint">"ej: spider-man"</string>
+
+    <string name="movies_favorites_header">Mis Favoritos</string>
+
+    <string name="preference_language_title">Idioma de la aplicación</string>
+    <string name="preference_language_summary">Selecciona el idioma para los títulos y descripciones de las películas</string>
+
+    <string-array name="preference_language_entries">
+        <item>Idioma local</item>
+        <item>English</item>
+    </string-array>
+
+</resources>

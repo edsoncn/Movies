@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:ads="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/root_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -13,7 +14,6 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:fitsSystemWindows="true"
         tools:openDrawer="start">
 
         <!-- 2. MAIN CONTENT AREA -->
@@ -42,14 +42,21 @@
     </androidx.drawerlayout.widget.DrawerLayout>
 
     <!-- 4. The AdView is fixed at the very bottom -->
-    <com.google.android.gms.ads.AdView
-        android:id="@+id/adView"
+    <FrameLayout
+        android:id="@+id/ad_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        ads:adSize="BANNER"
-        ads:adUnitId="ca-app-pub-4830109269722710/6946584351"
-        android:layout_marginBottom="4dp"
-        android:layout_marginTop="4dp"/>
+        android:background="@color/black_light">
+
+        <com.google.android.gms.ads.AdView
+            android:id="@+id/adView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            ads:adSize="BANNER"
+            ads:adUnitId="ca-app-pub-4830109269722710/3754699714"
+            android:layout_marginBottom="4dp"
+            android:layout_marginTop="4dp"/>
+    </FrameLayout>
 
 </LinearLayout>

@@ -41,7 +41,7 @@ public class LoadMoviesSearchService extends AbstractLoadMovies{
         param_apiKeyValue = context.getResources().getString(R.string.movie_api_key_value);
         param_page = context.getResources().getString(R.string.movie_api_page_param);
         param_languageParam = context.getResources().getString(R.string.movie_api_language_param);
-        param_languageValue = context.getResources().getString(R.string.movie_api_language_value);
+        param_languageValue = MoviesUtil.getSupportedLanguage(context);
         param_queryParam = context.getResources().getString(R.string.movie_api_query_param);
     }
 

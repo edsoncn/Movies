@@ -1,0 +1,67 @@
+<resources>
+    <string name="app_description">영화의 세계를 색다른 방식으로 탐험해보세요</string>
+
+    <string name="navigation_drawer_open">탐색 창 열기</string>
+    <string name="navigation_drawer_close">탐색 창 닫기</string>
+
+    <string name="title_movie_categories">영화 카테고리</string>
+    <string name="title_movie_detail">영화 상세 정보</string>
+    <string name="hello_world">안녕하세요!</string>
+    <string name="action_settings">설정</string>
+    <string name="menu_sort">정렬 기준</string>
+    <string name="menu_sort_by_popularity">인기순</string>
+    <string name="menu_sort_by_rate">높은 평점순</string>
+    <string name="menu_sort_by_upcoming">개봉 예정</string>
+    <string name="menu_sort_by_now_playing">현재 상영 중</string>
+
+    <string name="app_most_popular">인기순</string>
+    <string name="app_most_rate">높은 평점순</string>
+    <string name="app_upcoming">개봉 예정</string>
+    <string name="app_now_playing">현재 상영 중</string>
+    <string name="app_detail_rating">평점: </string>
+    <string name="app_detail_release">개봉일: </string>
+    <string name="app_detail_release_none">개봉일 정보를 찾을 수 없습니다.</string>
+    <string name="app_detail_synopsis">줄거리: </string>
+
+    <string name="movie_api_sortby_genres">{1}의 {0}</string>
+
+    <string name="movie_api_genres_pref_action">액션</string>
+    <string name="movie_api_genres_pref_drama">드라마</string>
+    <string name="movie_api_genres_pref_science">SF</string>
+    <string name="movie_api_genres_pref_comedy">코미디</string>
+    <string name="movie_api_genres_pref_animation">애니메이션</string>
+    <string name="movie_api_genres_pref_horror">공포</string>
+    <string name="movie_api_genres_pref_documentary">다큐멘터리</string>
+    <string name="movie_api_genres_pref_fantasy">판타지</string>
+    <string name="movie_api_genres_pref_romance">로맨스</string>
+    <string name="movie_api_genres_pref_war">전쟁</string>
+
+    <string name="nav_name_settings">설정</string>
+    <string name="nav_name_search">검색</string>
+    <string name="nav_name_favorite">즐겨찾기</string>
+
+    <string name="settings_header">설정</string>
+
+    <string name="preference_general_group">일반</string>
+    <string name="preference_about_group">정보</string>
+    <string name="preference_genres_list_title">선호하는 카테고리</string>
+    <string name="preference_genres_list_summary">메인 화면에 표시할 카테고리를 선택하세요</string>
+    <string name="preference_about_version_summary">현재 버전: {0}</string>
+
+    <string name="movies_detail_header">상세 정보</string>
+    <string name="movies_detail_action_remove">즐겨찾기에서 제거</string>
+
+    <string name="search_title">검색</string>
+    <string name="search_hint">"예: 스파이더맨"</string>
+
+    <string name="movies_favorites_header">나의 즐겨찾기</string>
+
+    <string name="preference_language_title">앱 언어</string>
+    <string name="preference_language_summary">영화 제목 및 설명을 표시할 언어를 선택하세요</string>
+
+    <string-array name="preference_language_entries">
+        <item>기기 언어</item>
+        <item>English</item>
+    </string-array>
+
+</resources>

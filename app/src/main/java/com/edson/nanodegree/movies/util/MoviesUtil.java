@@ -4,7 +4,10 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -23,6 +26,9 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Stream;
 
 /**
  * Created by edson on 21/07/2017.
@@ -31,6 +37,11 @@ import java.net.URL;
 public class MoviesUtil {
 
     public static final String LOG_TAG = MoviesUtil.class.getSimpleName();
+
+    public static final List<String> SUPPORTED_LANGUAGES = List.of("en", "es", "zh", "hi", "fr", "pt", "ja", "ko", "ar", "de");
+
+    @SuppressLint("ConstantLocale")
+    public static final String APP_LANGUAGE = java.util.Locale.getDefault().getLanguage();
 
     public static String getJsonResultURL(String myUrl) {
 
@@ -138,6 +149,23 @@ public class MoviesUtil {
             transaction.replace(R.id.fragmentMoviesContainer, fragment, TAG);
             transaction.commit();
         }
+    }
+
+    public static String getSupportedLanguage(Context context) {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+        String lang = prefs.getString("preference_language", "local");
+
+        if (lang.equals("en")) {
+            return lang;
+        } else {
+            lang = java.util.Locale.getDefault().getLanguage();
+        }
+
+        if (SUPPORTED_LANGUAGES.stream().anyMatch(lang::equals)) {
+            return lang;
+        }
+        // Default to English if the user language is not in your primary list
+        return "en";
     }
 
 }

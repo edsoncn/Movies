@@ -6,14 +6,20 @@ import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.MobileAds;
 import com.google.android.material.navigation.NavigationView;
 
+import androidx.activity.EdgeToEdge;
 import androidx.activity.OnBackPressedCallback;
+import androidx.core.graphics.Insets;
 import androidx.core.view.GravityCompat;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import android.os.Bundle;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+
 import android.view.MenuItem;
+import android.view.View;
 
 import com.edson.nanodegree.movies.util.MoviesUtil;
 
@@ -25,6 +31,7 @@ public class MoviesMainActivity extends AppCompatActivity
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        EdgeToEdge.enable(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movies_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -69,6 +76,19 @@ public class MoviesMainActivity extends AppCompatActivity
 
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        View rootLayout = findViewById(R.id.root_layout);
+        View adContainer = findViewById(R.id.ad_container);
+        View appBarLayout = findViewById(R.id.app_bar_layout);
+
+        ViewCompat.setOnApplyWindowInsetsListener(rootLayout, (v, insets) -> {
+            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+            if (appBarLayout != null) {
+                appBarLayout.setPadding(0, systemBars.top, 0, 0);
+            }
+            adContainer.setPadding(0, 0, 0, systemBars.bottom);
+            return WindowInsetsCompat.CONSUMED;
+        });
 
         // Initialize Mobile Ads SDK
         MobileAds.initialize(this, initializationStatus -> {            // Load the ad only after initialization is complete

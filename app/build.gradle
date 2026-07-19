@@ -8,8 +8,8 @@ android {
         applicationId "com.edson.nanodegree.movies.app"
         minSdk 24
         targetSdk = 36
-        versionCode 12
-        versionName "0.9.9"
+        versionCode 15
+        versionName "0.10.1"
         vectorDrawables.useSupportLibrary = true
     }
     buildTypes {
@@ -28,6 +28,7 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'androidx.appcompat:appcompat:1.7.1'
+    implementation 'androidx.activity:activity:1.10.1'
     implementation 'com.google.android.material:material:1.14.0'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
     implementation 'androidx.gridlayout:gridlayout:1.1.0'

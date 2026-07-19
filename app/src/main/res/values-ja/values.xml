@@ -1,0 +1,67 @@
+<resources>
+    <string name="app_description">今までとは違う視点で映画の世界を探索しましょう</string>
+
+    <string name="navigation_drawer_open">ナビゲーションメニューを開く</string>
+    <string name="navigation_drawer_close">ナビゲーションメニューを閉じる</string>
+
+    <string name="title_movie_categories">映画カテゴリー</string>
+    <string name="title_movie_detail">映画詳細</string>
+    <string name="hello_world">こんにちは！</string>
+    <string name="action_settings">設定</string>
+    <string name="menu_sort">並べ替え</string>
+    <string name="menu_sort_by_popularity">人気順</string>
+    <string name="menu_sort_by_rate">評価の高い順</string>
+    <string name="menu_sort_by_upcoming">公開予定</string>
+    <string name="menu_sort_by_now_playing">上映中</string>
+
+    <string name="app_most_popular">人気順</string>
+    <string name="app_most_rate">評価の高い順</string>
+    <string name="app_upcoming">公開予定</string>
+    <string name="app_now_playing">上映中</string>
+    <string name="app_detail_rating">評価：</string>
+    <string name="app_detail_release">公開日：</string>
+    <string name="app_detail_release_none">公開日が見つかりませんでした。</string>
+    <string name="app_detail_synopsis">あらすじ：</string>
+
+    <string name="movie_api_sortby_genres">{1} の {0}</string>
+
+    <string name="movie_api_genres_pref_action">アクション</string>
+    <string name="movie_api_genres_pref_drama">ドラマ</string>
+    <string name="movie_api_genres_pref_science">SF</string>
+    <string name="movie_api_genres_pref_comedy">コメディ</string>
+    <string name="movie_api_genres_pref_animation">アニメーション</string>
+    <string name="movie_api_genres_pref_horror">ホラー</string>
+    <string name="movie_api_genres_pref_documentary">ドキュメンタリー</string>
+    <string name="movie_api_genres_pref_fantasy">ファンタジー</string>
+    <string name="movie_api_genres_pref_romance">ロマンス</string>
+    <string name="movie_api_genres_pref_war">戦争</string>
+
+    <string name="nav_name_settings">設定</string>
+    <string name="nav_name_search">検索</string>
+    <string name="nav_name_favorite">お気に入り</string>
+
+    <string name="settings_header">設定</string>
+
+    <string name="preference_general_group">全般</string>
+    <string name="preference_about_group">アプリについて</string>
+    <string name="preference_genres_list_title">お好みのカテゴリー</string>
+    <string name="preference_genres_list_summary">メイン画面に表示したいカテゴリーを選択してください</string>
+    <string name="preference_about_version_summary">現在のバージョン：{0}</string>
+
+    <string name="movies_detail_header">詳細</string>
+    <string name="movies_detail_action_remove">お気に入りから削除</string>
+
+    <string name="search_title">検索</string>
+    <string name="search_hint">"例: スパイダーマン"</string>
+
+    <string name="movies_favorites_header">マイ・お気に入り</string>
+
+    <string name="preference_language_title">アプリの言語</string>
+    <string name="preference_language_summary">映画のタイトルと説明の言語を選択してください</string>
+
+    <string-array name="preference_language_entries">
+        <item>端末の言語</item>
+        <item>English</item>
+    </string-array>
+
+</resources>

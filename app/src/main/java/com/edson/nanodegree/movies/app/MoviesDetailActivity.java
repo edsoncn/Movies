@@ -26,6 +26,8 @@ import com.edson.nanodegree.movies.bean.MovieBean;
 import com.edson.nanodegree.movies.helper.AppDatabase;
 import com.squareup.picasso.Picasso;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import static android.widget.ImageView.ScaleType.CENTER_CROP;
@@ -131,9 +133,16 @@ public class MoviesDetailActivity extends AppCompatActivity {
             TextView title = rootView.findViewById(R.id.title);
             title.setText(movie.getTitle());
 
+            float ratingF = BigDecimal.valueOf(movie.getRating() / 2.0)
+                    .setScale(1, RoundingMode.HALF_UP).floatValue();
+
             RatingBar ratingBar = rootView.findViewById(R.id.ratingBar);
-            ratingBar.setRating(movie.getRating() / 2);
+            ratingBar.setStepSize(0.25f);
+            ratingBar.setRating(ratingF);
             Log.i(LOG_TAG, movie.getTitle() + ": " + ratingBar.getRating() + ", " + movie.getRating());
+
+            TextView ratingNumber = rootView.findViewById(R.id.ratingNumber);
+            ratingNumber.setText(String.format(java.util.Locale.getDefault(), "(%.1f)", ratingF));
 
             TextView release = rootView.findViewById(R.id.release);
             String releaseFormat = movie.getReleaseFormat(

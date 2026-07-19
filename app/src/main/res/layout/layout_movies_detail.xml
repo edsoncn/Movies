@@ -65,14 +65,26 @@
                         android:layout_marginTop="20dp"/>
 
                     <RatingBar
+                        android:id="@+id/ratingBar"
+                        style="@style/Widget.AppCompat.RatingBar.Indicator"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        style="?android:attr/ratingBarStyleSmall"
                         android:isIndicator="true"
-                        android:stepSize="0.25"
-                        android:background="@color/black_light"
-                        android:id="@+id/ratingBar" />
+                        android:numStars="5"
+                        android:stepSize="0.1"
+                        android:scaleX="0.72"
+                        android:scaleY="0.72"
+                        android:transformPivotX="0dp"
+                        android:transformPivotY="0dp"
+                        android:progressBackgroundTint="@color/white_dark3" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceSmall"
+                        android:textColor="@color/white_dark2"
+                        android:layout_marginTop="-6dp"
+                        android:id="@+id/ratingNumber" />
 
                     <TextView
                         android:layout_width="match_parent"
@@ -137,6 +149,6 @@
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
         android:visibility="gone"
-        app:srcCompat="@drawable/ic_star" />a
+        app:srcCompat="@drawable/ic_star" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

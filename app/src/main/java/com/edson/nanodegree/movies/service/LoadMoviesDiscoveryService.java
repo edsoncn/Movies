@@ -70,7 +70,7 @@ public class LoadMoviesDiscoveryService extends AbstractLoadMovies {
         param_sortRateDescValue = context.getResources().getString(R.string.movie_api_sort_rate_desc);
         param_page = context.getResources().getString(R.string.movie_api_page_param);
         param_languageParam = context.getResources().getString(R.string.movie_api_language_param);
-        param_languageValue = context.getResources().getString(R.string.movie_api_language_value);
+        param_languageValue = MoviesUtil.getSupportedLanguage(context);
         param_genResParam = context.getResources().getString(R.string.movie_api_genres_param);
         param_primaryReleaseDateGteParam = context.getResources().getString(R.string.movie_api_primary_release_date_gte);
         param_primaryReleaseDateLteParam = context.getResources().getString(R.string.movie_api_primary_release_date_lte);

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Movies</string>
+    <string name="app_name" translatable="false">Movies</string>
     <string name="app_description">Explore the movies in a different way</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
@@ -14,7 +14,7 @@
     <string name="menu_sort_by_rate">Most Rate</string>
     <string name="menu_sort_by_upcoming">Upcoming</string>
     <string name="menu_sort_by_now_playing">Now Playing</string>
-    <string name="button_plus">+</string>
+    <string name="button_plus" translatable="false">+</string>
     <string name="app_most_popular">Most Popular</string>
     <string name="app_most_rate">Most Rate</string>
     <string name="app_upcoming">Upcoming</string>
@@ -22,32 +22,32 @@
     <string name="app_detail_rating">Rating: </string>
     <string name="app_detail_release">Release: </string>
     <string name="app_detail_release_none">No release date found.</string>
-    <string name="app_detail_release_format8601">yyyy-MM-dd</string>
-    <string name="app_detail_release_format">EEEE, MMMM d, yyyy</string>
+    <string name="app_detail_release_format8601" translatable="false">yyyy-MM-dd</string>
+    <string name="app_detail_release_format" translatable="false">EEEE, MMMM d, yyyy</string>
     <string name="app_detail_synopsis">Synopsis: </string>
 
-    <string name="movie_api_base_image_url">https://image.tmdb.org/t/p/w185//</string>
-    <string name="movie_api_base_image_url_500">https://image.tmdb.org/t/p/w500//</string>
-    <string name="movie_api_base_discovery_url">https://api.themoviedb.org/3/discover/movie</string>
-    <string name="movie_api_base_genres_url">https://api.themoviedb.org/3/genre/movie/list</string>
-    <string name="movie_api_base_search_url">https://api.themoviedb.org/3/search/movie</string>
+    <string name="movie_api_base_image_url" translatable="false">https://image.tmdb.org/t/p/w185//</string>
+    <string name="movie_api_base_image_url_500" translatable="false">https://image.tmdb.org/t/p/w500//</string>
+    <string name="movie_api_base_discovery_url" translatable="false">https://api.themoviedb.org/3/discover/movie</string>
+    <string name="movie_api_base_genres_url" translatable="false">https://api.themoviedb.org/3/genre/movie/list</string>
+    <string name="movie_api_base_search_url" translatable="false">https://api.themoviedb.org/3/search/movie</string>
 
-    <string name="movie_api_key_param">api_key</string>
-    <string name="movie_api_key_value">7a57cc888b988bba709539b65b663152</string>
-    <string name="movie_api_sort_param">sort_by</string>
-    <string name="movie_api_sort_popularity_desc">popularity.desc</string>
-    <string name="movie_api_sort_rate_desc">vote_average.desc</string>
-    <string name="movie_api_primary_release_date_gte">primary_release_date.gte</string>
-    <string name="movie_api_primary_release_date_lte">primary_release_date.lte</string>
-    <string name="movie_api_language_param">language</string>
-    <string name="movie_api_language_value">en</string>
-    <string name="movie_api_page_param">page</string>
-    <string name="movie_api_genres_param">with_genres</string>
-    <string name="movie_api_query_param">query</string>
-    <string name="movie_api_certification_country_param">certification_country</string>
-    <string name="movie_api_certification_country_value">US</string>
-    <string name="movie_api_certification_lte_param">certification.lte</string>
-    <string name="movie_api_certification_nc17_value">NC-17</string>
+    <string name="movie_api_key_param" translatable="false">api_key</string>
+    <string name="movie_api_key_value" translatable="false">7a57cc888b988bba709539b65b663152</string>
+    <string name="movie_api_sort_param" translatable="false">sort_by</string>
+    <string name="movie_api_sort_popularity_desc" translatable="false">popularity.desc</string>
+    <string name="movie_api_sort_rate_desc" translatable="false">vote_average.desc</string>
+    <string name="movie_api_primary_release_date_gte" translatable="false">primary_release_date.gte</string>
+    <string name="movie_api_primary_release_date_lte" translatable="false">primary_release_date.lte</string>
+    <string name="movie_api_language_param" translatable="false">language</string>
+    <string name="movie_api_language_value" translatable="false">en</string>
+    <string name="movie_api_page_param" translatable="false">page</string>
+    <string name="movie_api_genres_param" translatable="false">with_genres</string>
+    <string name="movie_api_query_param" translatable="false">query</string>
+    <string name="movie_api_certification_country_param" translatable="false">certification_country</string>
+    <string name="movie_api_certification_country_value" translatable="false">US</string>
+    <string name="movie_api_certification_lte_param" translatable="false">certification.lte</string>
+    <string name="movie_api_certification_nc17_value" translatable="false">NC-17</string>
 
     <integer name="page_size_4">4</integer>
     <integer name="page_size_8">8</integer>
@@ -55,16 +55,16 @@
 
     <string name="movie_api_sortby_genres">{0} in {1}</string>
 
-    <string name="movie_api_genres_action_id">28</string>
-    <string name="movie_api_genres_drama_id">18</string>
-    <string name="movie_api_genres_science_id">878</string>
-    <string name="movie_api_genres_comedy_id">35</string>
-    <string name="movie_api_genres_animation_id">16</string>
-    <string name="movie_api_genres_horror_id">27</string>
-    <string name="movie_api_genres_documentary_id">99</string>
-    <string name="movie_api_genres_fantasy_id">14</string>
-    <string name="movie_api_genres_romance_id">10749</string>
-    <string name="movie_api_genres_war_id">10752</string>
+    <string name="movie_api_genres_action_id" translatable="false">28</string>
+    <string name="movie_api_genres_drama_id" translatable="false">18</string>
+    <string name="movie_api_genres_science_id" translatable="false">878</string>
+    <string name="movie_api_genres_comedy_id" translatable="false">35</string>
+    <string name="movie_api_genres_animation_id" translatable="false">16</string>
+    <string name="movie_api_genres_horror_id" translatable="false">27</string>
+    <string name="movie_api_genres_documentary_id" translatable="false">99</string>
+    <string name="movie_api_genres_fantasy_id" translatable="false">14</string>
+    <string name="movie_api_genres_romance_id" translatable="false">10749</string>
+    <string name="movie_api_genres_war_id" translatable="false">10752</string>
 
     <string name="movie_api_genres_pref_action">Action</string>
     <string name="movie_api_genres_pref_drama">Drama</string>
@@ -85,10 +85,10 @@
 
     <string name="preference_general_group">General</string>
     <string name="preference_about_group">About</string>
-    <string name="preference_genres_list_key">preference_genres_list</string>
+    <string name="preference_genres_list_key" translatable="false">preference_genres_list</string>
     <string name="preference_genres_list_title">Categories of your preference</string>
     <string name="preference_genres_list_summary">Choose the categories you want to see on the main screen</string>
-    <string name="preference_about_version_key">preference_about_version</string>
+    <string name="preference_about_version_key" translatable="false">preference_about_version</string>
     <string name="preference_about_version_summary">Current version is {0}</string>
 
     <string name="movies_detail_header">Movie details</string>
@@ -98,5 +98,19 @@
     <string name="search_hint">"e.g., spider"</string>
 
     <string name="movies_favorites_header">Movie Favorites</string>
+
+    <string name="preference_language_key" translatable="false">preference_language</string>
+    <string name="preference_language_title">App Language</string>
+    <string name="preference_language_summary">Select the language for movie titles and descriptions</string>
+
+    <string-array name="preference_language_entries">
+        <item>Local language</item>
+        <item>English</item>
+    </string-array>
+
+    <string-array name="preference_language_values" translatable="false">
+        <item>local</item>
+        <item>en</item>
+    </string-array>
 
 </resources>

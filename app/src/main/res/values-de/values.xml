@@ -1,0 +1,67 @@
+<resources>
+    <string name="app_description">Entdecke die Welt des Kinos auf eine andere Art und Weise</string>
+
+    <string name="navigation_drawer_open">Navigationsmenü öffnen</string>
+    <string name="navigation_drawer_close">Navigationsmenü schließen</string>
+
+    <string name="title_movie_categories">Filmkategorien</string>
+    <string name="title_movie_detail">Filmdetails</string>
+    <string name="hello_world">Hallo Welt!</string>
+    <string name="action_settings">Einstellungen</string>
+    <string name="menu_sort">Sortieren nach</string>
+    <string name="menu_sort_by_popularity">Beliebtheit</string>
+    <string name="menu_sort_by_rate">Beste Bewertung</string>
+    <string name="menu_sort_by_upcoming">Demnächst</string>
+    <string name="menu_sort_by_now_playing">Aktuell im Kino</string>
+
+    <string name="app_most_popular">Beliebtheit</string>
+    <string name="app_most_rate">Beste Bewertung</string>
+    <string name="app_upcoming">Demnächst</string>
+    <string name="app_now_playing">Aktuell im Kino</string>
+    <string name="app_detail_rating">Bewertung: </string>
+    <string name="app_detail_release">Veröffentlichung: </string>
+    <string name="app_detail_release_none">Kein Veröffentlichungsdatum gefunden.</string>
+    <string name="app_detail_synopsis">Handlung: </string>
+
+    <string name="movie_api_sortby_genres">{0} in {1}</string>
+
+    <string name="movie_api_genres_pref_action">Action</string>
+    <string name="movie_api_genres_pref_drama">Drama</string>
+    <string name="movie_api_genres_pref_science">Science-Fiction</string>
+    <string name="movie_api_genres_pref_comedy">Komödie</string>
+    <string name="movie_api_genres_pref_animation">Animation</string>
+    <string name="movie_api_genres_pref_horror">Horror</string>
+    <string name="movie_api_genres_pref_documentary">Dokumentation</string>
+    <string name="movie_api_genres_pref_fantasy">Fantasy</string>
+    <string name="movie_api_genres_pref_romance">Romanze</string>
+    <string name="movie_api_genres_pref_war">Kriegsfilm</string>
+
+    <string name="nav_name_settings">Einstellungen</string>
+    <string name="nav_name_search">Suchen</string>
+    <string name="nav_name_favorite">Favoriten</string>
+
+    <string name="settings_header">Einstellungen</string>
+
+    <string name="preference_general_group">Allgemein</string>
+    <string name="preference_about_group">Über</string>
+    <string name="preference_genres_list_title">Bevorzugte Kategorien</string>
+    <string name="preference_genres_list_summary">Wähle die Kategorien aus, die auf dem Hauptbildschirm angezeigt werden sollen</string>
+    <string name="preference_about_version_summary">Aktuelle Version: {0}</string>
+
+    <string name="movies_detail_header">Details</string>
+    <string name="movies_detail_action_remove">Aus Favoriten entfernen</string>
+
+    <string name="search_title">Suchen</string>
+    <string name="search_hint">"z.B. Spider-Man"</string>
+
+    <string name="movies_favorites_header">Meine Favoriten</string>
+
+    <string name="preference_language_title">App-Sprache</string>
+    <string name="preference_language_summary">Wähle die Sprache für Filmtitel und Beschreibungen</string>
+
+    <string-array name="preference_language_entries">
+        <item>Systemsprache</item>
+        <item>English</item>
+    </string-array>
+
+</resources>

@@ -1,0 +1,66 @@
+<resources>
+    <string name="app_description">Explore o mundo do cinema de uma forma diferente</string>
+
+    <string name="navigation_drawer_open">Abrir painel de navegação</string>
+    <string name="navigation_drawer_close">Fechar painel de navegação</string>
+
+    <string name="title_movie_categories">Categorias de Filmes</string>
+    <string name="title_movie_detail">Detalhes do Filme</string>
+    <string name="hello_world">Olá mundo!</string>
+    <string name="action_settings">Configurações</string>
+    <string name="menu_sort">Ordenar por</string>
+    <string name="menu_sort_by_popularity">Mais populares</string>
+    <string name="menu_sort_by_rate">Melhor avaliados</string>
+    <string name="menu_sort_by_upcoming">Próximas estreias</string>
+    <string name="menu_sort_by_now_playing">Em cartaz</string>
+    <string name="app_most_popular">Mais populares</string>
+    <string name="app_most_rate">Melhor avaliados</string>
+    <string name="app_upcoming">Próximas estreias</string>
+    <string name="app_now_playing">Em cartaz</string>
+    <string name="app_detail_rating">Avaliação: </string>
+    <string name="app_detail_release">Lançamento: </string>
+    <string name="app_detail_release_none">Data de lançamento não encontrada.</string>
+    <string name="app_detail_synopsis">Sinopse: </string>
+
+    <string name="movie_api_sortby_genres">{0} em {1}</string>
+
+    <string name="movie_api_genres_pref_action">Ação</string>
+    <string name="movie_api_genres_pref_drama">Drama</string>
+    <string name="movie_api_genres_pref_science">Ficção Científica</string>
+    <string name="movie_api_genres_pref_comedy">Comédia</string>
+    <string name="movie_api_genres_pref_animation">Animação</string>
+    <string name="movie_api_genres_pref_horror">Terror</string>
+    <string name="movie_api_genres_pref_documentary">Documentário</string>
+    <string name="movie_api_genres_pref_fantasy">Fantasia</string>
+    <string name="movie_api_genres_pref_romance">Romance</string>
+    <string name="movie_api_genres_pref_war">Guerra</string>
+
+    <string name="nav_name_settings">Configurações</string>
+    <string name="nav_name_search">Buscar</string>
+    <string name="nav_name_favorite">Favoritos</string>
+
+    <string name="settings_header">Configurações</string>
+
+    <string name="preference_general_group">Geral</string>
+    <string name="preference_about_group">Sobre</string>
+    <string name="preference_genres_list_title">Categorias preferidas</string>
+    <string name="preference_genres_list_summary">Escolha as categorias que deseja ver na tela principal</string>
+    <string name="preference_about_version_summary">Versão atual: {0}</string>
+
+    <string name="movies_detail_header">Detalhes</string>
+    <string name="movies_detail_action_remove">Remover dos favoritos</string>
+
+    <string name="search_title">Buscar</string>
+    <string name="search_hint">"ex: homem-aranha"</string>
+
+    <string name="movies_favorites_header">Meus Favoritos</string>
+
+    <string name="preference_language_title">Idioma do aplicativo</string>
+    <string name="preference_language_summary">Selecione o idioma para os títulos e descrições dos filmes</string>
+
+    <string-array name="preference_language_entries">
+        <item>Idioma local</item>
+        <item>English</item>
+    </string-array>
+
+</resources>

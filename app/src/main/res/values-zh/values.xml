@@ -1,0 +1,66 @@
+<resources>
+    <string name="app_description">以不同的方式探索电影世界</string>
+
+    <string name="navigation_drawer_open">打开导航抽屉</string>
+    <string name="navigation_drawer_close">关闭导航抽屉</string>
+
+    <string name="title_movie_categories">电影类别</string>
+    <string name="title_movie_detail">电影详情</string>
+    <string name="hello_world">你好，世界！</string>
+    <string name="action_settings">设置</string>
+    <string name="menu_sort">排序方式</string>
+    <string name="menu_sort_by_popularity">最受欢迎</string>
+    <string name="menu_sort_by_rate">最高评分</string>
+    <string name="menu_sort_by_upcoming">即将上映</string>
+    <string name="menu_sort_by_now_playing">正在上映</string>
+    <string name="app_most_popular">最受欢迎</string>
+    <string name="app_most_rate">最高评分</string>
+    <string name="app_upcoming">即将上映</string>
+    <string name="app_now_playing">正在上映</string>
+    <string name="app_detail_rating">评分：</string>
+    <string name="app_detail_release">发行日期：</string>
+    <string name="app_detail_release_none">未找到发行日期。</string>
+    <string name="app_detail_synopsis">剧情简介：</string>
+
+    <string name="movie_api_sortby_genres">{1} 中的 {0}</string>
+
+    <string name="movie_api_genres_pref_action">动作</string>
+    <string name="movie_api_genres_pref_drama">剧情</string>
+    <string name="movie_api_genres_pref_science">科幻</string>
+    <string name="movie_api_genres_pref_comedy">喜剧</string>
+    <string name="movie_api_genres_pref_animation">动画</string>
+    <string name="movie_api_genres_pref_horror">恐怖</string>
+    <string name="movie_api_genres_pref_documentary">纪录片</string>
+    <string name="movie_api_genres_pref_fantasy">奇幻</string>
+    <string name="movie_api_genres_pref_romance">爱情</string>
+    <string name="movie_api_genres_pref_war">战争</string>
+
+    <string name="nav_name_settings">设置</string>
+    <string name="nav_name_search">搜索</string>
+    <string name="nav_name_favorite">收藏</string>
+
+    <string name="settings_header">设置</string>
+
+    <string name="preference_general_group">常规</string>
+    <string name="preference_about_group">关于</string>
+    <string name="preference_genres_list_title">偏好类别</string>
+    <string name="preference_genres_list_summary">选择您希望在主屏幕上显示的类别</string>
+    <string name="preference_about_version_summary">当前版本：{0}</string>
+
+    <string name="movies_detail_header">详情</string>
+    <string name="movies_detail_action_remove">从收藏中移除</string>
+
+    <string name="search_title">搜索</string>
+    <string name="search_hint">"例如：蜘蛛侠"</string>
+
+    <string name="movies_favorites_header">我的收藏</string>
+
+    <string name="preference_language_title">应用语言</string>
+    <string name="preference_language_summary">选择电影标题和描述的语言</string>
+
+    <string-array name="preference_language_entries">
+        <item>本地语言</item>
+        <item>English</item>
+    </string-array>
+
+</resources>

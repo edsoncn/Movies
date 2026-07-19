@@ -1,0 +1,66 @@
+<resources>
+    <string name="app_description">फ़िल्मों की दुनिया को एक अलग नज़रिए से देखें</string>
+
+    <string name="navigation_drawer_open">नेविगेशन पैनल खोलें</string>
+    <string name="navigation_drawer_close">नेविगेशन पैनल बंद करें</string>
+
+    <string name="title_movie_categories">फ़िल्म श्रेणियाँ</string>
+    <string name="title_movie_detail">फ़िल्म का विवरण</string>
+    <string name="hello_world">नमस्ते दुनिया!</string>
+    <string name="action_settings">सेटिंग्स</string>
+    <string name="menu_sort">क्रमबद्ध करें</string>
+    <string name="menu_sort_by_popularity">सबसे लोकप्रिय</string>
+    <string name="menu_sort_by_rate">उच्चतम रेटिंग</string>
+    <string name="menu_sort_by_upcoming">आगामी</string>
+    <string name="menu_sort_by_now_playing">सिनेमाघरों में</string>
+    <string name="app_most_popular">सबसे लोकप्रिय</string>
+    <string name="app_most_rate">उच्चतम रेटिंग</string>
+    <string name="app_upcoming">आगामी</string>
+    <string name="app_now_playing">सिनेमाघरों में</string>
+    <string name="app_detail_rating">रेटिंग: </string>
+    <string name="app_detail_release">रिलीज़: </string>
+    <string name="app_detail_release_none">रिलीज़ की तारीख नहीं मिली।</string>
+    <string name="app_detail_synopsis">सारांश: </string>
+
+    <string name="movie_api_sortby_genres">{1} में {0}</string>
+
+    <string name="movie_api_genres_pref_action">एक्शन</string>
+    <string name="movie_api_genres_pref_drama">ड्रामा</string>
+    <string name="movie_api_genres_pref_science">विज्ञान कथा</string>
+    <string name="movie_api_genres_pref_comedy">कॉमेडी</string>
+    <string name="movie_api_genres_pref_animation">एनिमेशन</string>
+    <string name="movie_api_genres_pref_horror">हॉरर</string>
+    <string name="movie_api_genres_pref_documentary">डॉक्यूमेंट्री</string>
+    <string name="movie_api_genres_pref_fantasy">फंतासी</string>
+    <string name="movie_api_genres_pref_romance">रोमांस</string>
+    <string name="movie_api_genres_pref_war">युद्ध</string>
+
+    <string name="nav_name_settings">सेटिंग्स</string>
+    <string name="nav_name_search">खोजें</string>
+    <string name="nav_name_favorite">पसंदीदा</string>
+
+    <string name="settings_header">सेटिंग्स</string>
+
+    <string name="preference_general_group">सामान्य</string>
+    <string name="preference_about_group">के बारे में</string>
+    <string name="preference_genres_list_title">पसंदीदा श्रेणियाँ</string>
+    <string name="preference_genres_list_summary">वे श्रेणियाँ चुनें जिन्हें आप मुख्य स्क्रीन पर देखना चाहते हैं</string>
+    <string name="preference_about_version_summary">वर्तमान संस्करण: {0}</string>
+
+    <string name="movies_detail_header">विवरण</string>
+    <string name="movies_detail_action_remove">पसंदीदा से हटाएँ</string>
+
+    <string name="search_title">खोजें</string>
+    <string name="search_hint">"जैसे: स्पाइडर-मैन"</string>
+
+    <string name="movies_favorites_header">मेरे पसंदीदा</string>
+
+    <string name="preference_language_title">ऐप की भाषा</string>
+    <string name="preference_language_summary">फ़िल्मों के शीर्षक और विवरण के लिए भाषा चुनें</string>
+
+    <string-array name="preference_language_entries">
+        <item>स्थानीय भाषा</item>
+        <item>English</item>
+    </string-array>
+
+</resources>
